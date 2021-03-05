@@ -42,6 +42,7 @@ export default {
   background: #222b45;
 }
 .icons_media {
+  cursor: pointer;
   width: 40px;
   object-fit: contain;
 }

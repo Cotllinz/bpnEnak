@@ -163,9 +163,9 @@ export default {
     color: #ffffff;
     background: #ff4545;
     position: absolute;
-    top: 50%;
+    top: 40%;
     margin-left: -40px;
-    transform: translate(10%, -50%);
+
     transform: rotateZ(90deg);
   }
   @media (max-width: 393px) {
@@ -182,6 +182,16 @@ export default {
   @media (max-width: 375px) {
     .slick {
       min-width: 140vw;
+    }
+  }
+  @media (max-width: 363px) {
+    .slick {
+      min-width: 145vw;
+    }
+  }
+  @media (max-width: 353px) {
+    .slick {
+      min-width: 150vw;
     }
   }
 }
