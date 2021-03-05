@@ -194,5 +194,10 @@ export default {
       min-width: 150vw;
     }
   }
+    @media (max-width: 320px) {
+    .slick {
+      min-width: 165vw;
+    }
+  }
 }
 </style>
