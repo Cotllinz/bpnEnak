@@ -13,7 +13,9 @@
             alt="imagesLogo"
         /></b-navbar-brand>
         <b-navbar-nav class="navbar_items flex-row">
-          <b-nav-item @click="designerAnjg" class="mr-lg-3 mr-3">Login</b-nav-item>
+          <b-nav-item @click="designerAnjg" class="mr-lg-3 mr-3"
+            >Login</b-nav-item
+          >
           <b-nav-item>Signup</b-nav-item>
         </b-navbar-nav>
         <!-- Right aligned nav items -->
@@ -34,7 +36,9 @@ export default {
       this.scrollPosition = window.scrollY
     },
     designerAnjg() {
-      alert('Designernya ke Anjg Bangt Kimak')
+      alert(
+        'Designernya ke Anjg kalo ngasih Design Gak tau diri anjg bangst \n \n aku sayang yoko'
+      )
     }
   },
   created() {

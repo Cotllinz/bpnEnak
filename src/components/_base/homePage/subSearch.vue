@@ -178,7 +178,7 @@ button.btn__subDistrict {
   transform: translate(30%, 13%);
 }
 @media (max-width: 576px) {
-  .col{
+  .col {
     padding-right: 10px;
   }
   .icons_arrows {
