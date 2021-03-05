@@ -3,6 +3,10 @@
     <div class="homebg__display">
       <navBar />
       <headerHome />
+      <mainHome />
+      <corouselFood />
+      <subSearch />
+      <footerBar />
     </div>
   </div>
 </template>
@@ -11,20 +15,27 @@
 // @ is an alias to /src
 import navBar from '@/components/navigationBar.vue'
 import headerHome from '@/components/_base/homePage/headerHome.vue'
+import mainHome from '@/components/_base/homePage/mainComponentHome.vue'
+import corouselFood from '@/components/_base/homePage/corouselFoods.vue'
+import subSearch from '@/components/_base/homePage/subSearch.vue'
+import footerBar from '@/components/footerBar.vue'
 export default {
   name: 'Home',
   components: {
     navBar,
-    headerHome
+    headerHome,
+    mainHome,
+    corouselFood,
+    subSearch,
+    footerBar
+  },
+  data() {
+    return {}
   }
 }
 </script>
 <style scoped>
-.homebg__display {
-  background-image: url('../assets/Images/MainThema/bg_images.jpg');
-  height: 550px;
-  background-size: cover;
-  background-position: 35% 10%;
-  background-repeat: no-repeat;
+.home {
+  background: #ffffff;
 }
 </style>

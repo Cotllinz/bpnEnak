@@ -19,12 +19,36 @@ export default {
 .title_header {
   text-align: center;
   position: absolute;
-  top: 40%;
-  font-weight: 400;
+  top: 50%;
   color: #ffffff;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Arvo', serif;
   left: 0;
   right: 0;
   transform: translateY(-50%);
+}
+.title_header h1 {
+  font-size: 60px;
+  font-weight: 100;
+  padding: 0 21%;
+  line-height: 90px;
+}
+.headerHome {
+  background-image: url('../../../assets/Images/MainThema/bg_images.jpg');
+  height: 550px;
+  position: relative;
+  background-size: cover;
+  background-position: 35% 10%;
+  background-repeat: no-repeat;
+}
+@media (max-width: 576px) {
+  .headerHome {
+    background-position: 15% 10%;
+  }
+  .title_header h1 {
+    font-size: 50px;
+    font-weight: 100;
+    padding: 0 0%;
+    line-height: 65px;
+  }
 }
 </style>
