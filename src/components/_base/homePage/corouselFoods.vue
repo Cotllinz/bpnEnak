@@ -170,7 +170,7 @@ export default {
   }
   @media (max-width: 393px) {
     .card {
-      width: 250px;
+      width: 130px;
       border-radius: 10px;
       margin-bottom: 17px;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
