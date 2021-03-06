@@ -8,6 +8,7 @@
             <button
               @mouseover="animationOn1 = true"
               @mouseleave="animationOn1 = false"
+              @click="onClickSearch"
               class="btn__subDistrict"
             >
               Balikpapan Kota (62)
@@ -122,6 +123,11 @@ export default {
       animationOn4: false,
       animationOn5: false,
       animationOn6: false
+    }
+  },
+  methods: {
+    onClickSearch() {
+      this.$router.push('/Bppsearch')
     }
   }
 }

@@ -51,17 +51,29 @@ export default {
       settings: {
         infinite: false,
         slidesToShow: 6,
-        arrows: false,
+        arrows: false,  
         slidesToScroll: 1,
         responsive: [
           {
-            breakpoint: 750,
+            breakpoint: 2999,
             settings: {
-              slidesToShow: 1
+              slidesToShow: 6
             }
           },
           {
-            breakpoint: 1281,
+            breakpoint: 896 ,
+            settings: {
+              slidesToShow:3
+            }
+          },
+          {
+            breakpoint: 4001,
+            settings: {
+              slidesToShow: 7
+            }
+          },
+          {
+            breakpoint: 1481,
             settings: {
               slidesToShow: 5
             }

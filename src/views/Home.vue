@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="homebg__display">
-      <navBar />
+      <navBar :onScroll="true" />
       <headerHome />
       <mainHome />
       <corouselFood />
@@ -31,6 +31,9 @@ export default {
   },
   data() {
     return {}
+  },
+  created() {
+    window.scrollTo(0, 0)
   }
 }
 </script>
