@@ -8,10 +8,10 @@
           <h5>Search results for “all”</h5>
         </section>
         <b-row>
-          <b-col lg="4">
+          <b-col cols="4" lg="4" class="d-none d-md-block">
             <searchFilter />
           </b-col>
-          <b-col>
+          <b-col md="8">
             <cardProduct />
           </b-col>
         </b-row>

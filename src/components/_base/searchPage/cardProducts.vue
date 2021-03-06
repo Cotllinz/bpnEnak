@@ -1,7 +1,11 @@
 <template>
   <section class="mt-lg-3">
     <b-row cols="1">
-      <b-col v-for="(items, index) in data" :key="index">
+      <b-col
+        class="d-none d-lg-block"
+        v-for="(items, index) in data"
+        :key="'Dekstop' + index"
+      >
         <b-card
           :img-src="
             'https://images.unsplash.com/photo-1594030990808-ebd1c2247c28?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=696&q=80'
@@ -21,7 +25,52 @@
             <p>Open Hours 09:00 - 21:00</p>
             <div class="d-flex align-items-center">
               <b-form-rating
-                id="rating-inline"
+                id="rating-dekstops"
+                show-value
+                show-value-max
+                precision="2"
+                readonly
+                class="mb-lg-2"
+                inline
+                color="#FCC400"
+                value="3.544"
+              ></b-form-rating>
+              <label class="label_revies" for="label_revies"
+                >(110 Reviews)</label
+              >
+            </div>
+
+            <button class="btn_visitRestaurant w-100 py-2">
+              Visit Restaurants
+            </button>
+          </section>
+        </b-card>
+      </b-col>
+      <b-col
+        v-for="(items, index) in data"
+        :key="'Mobile' + index"
+        class="d-block d-lg-none"
+      >
+        <b-card
+          :img-src="
+            'https://images.unsplash.com/photo-1594030990808-ebd1c2247c28?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=696&q=80'
+          "
+          class="py-4 px-3 d-block card_images align-items-center mb-4"
+          img-alt="cardProduct"
+          img-left
+        >
+          <section class="desc_Food mt-2">
+            <h2>Kepiting Saus Khas Dandito</h2>
+            <h5>Gn. Bahagia</h5>
+            <hr />
+            <p>
+              Jl. Marsma R. Iswahyudi No.70, Gn. Bahagia, Kecamatan Balikpapan
+              Selatan, Kota Balikpapan, Kalimantan Timur
+            </p>
+            <p>Open Hours 09:00 - 21:00</p>
+            <div class="d-flex align-items-center">
+              <b-form-rating
+                id="rating-mobile"
                 show-value
                 show-value-max
                 precision="2"
@@ -42,6 +91,7 @@
           </section>
         </b-card>
       </b-col>
+
       <b-col>
         <button class="btn_loadMore py-2 px-5">Load More</button>
       </b-col>
@@ -119,5 +169,30 @@ hr {
   font-family: 'Poppins', sans-serif;
   color: #ffffff;
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
+}
+@media (max-width: 990px) {
+  .card_images .card-img-left {
+    min-width: 100%;
+    height: 230px;
+    border-radius: 10px;
+    object-fit: cover;
+    object-position: 45%;
+  }
+  .card-body {
+    padding: 0;
+  }
+  .label_revies {
+    top: 5px;
+    position: relative;
+  }
+}
+
+@media (max-width: 347px) {
+  .b-rating {
+    font-size: 13px;
+  }
+  .label_revies {
+    font-size: 14.5px;
+  }
 }
 </style>

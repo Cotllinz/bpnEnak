@@ -16,7 +16,7 @@
         </b-navbar-brand>
 
         <!-- Search Section -->
-        <b-navbar-nav v-if="!onScroll" class="ml-2">
+        <b-navbar-nav v-if="!onScroll" class="ml-2 d-none d-md-block">
           <b-input-group class="search__Input">
             <template #prepend>
               <b-input-group-text class="search_btn"
@@ -45,10 +45,11 @@
           >
           <b-nav-item v-if="onScroll">Signup</b-nav-item>
           <b-nav-item v-else
-            ><button class="btn_singUp py-2 px-3">
+            ><button class="btn_singUp d-none d-md-block py-2 px-3">
               Create Account
-            </button></b-nav-item
-          >
+            </button>
+            <a class=" d-block d-md-none mobile_signup">Signup</a>
+          </b-nav-item>
         </b-navbar-nav>
         <!-- Right aligned nav items -->
       </b-container>
@@ -110,6 +111,13 @@ export default {
   color: #ffffff;
   outline: none;
 }
+.mobile_signup {
+  color: #ffffff;
+  text-decoration: none;
+}
+.mobile_signup:hover {
+  color: #e9e9e9;
+}
 .btn_Onsearch {
   border: none;
   font-family: 'Poppins', sans-serif;
@@ -149,5 +157,21 @@ input[type='text'] {
   box-shadow: none !important;
   border: 1px solid #ccc;
   border-left: none;
+}
+@media (max-width: 1025px) {
+  .search__Input {
+    width: 440px;
+  }
+}
+@media (max-width: 990px) {
+  .search__Input {
+    width: 300px;
+  }
+  input[type='text'] {
+    font-size: 16px;
+    background: #fafafa;
+    border-radius: 10px;
+    letter-spacing: 0;
+  }
 }
 </style>

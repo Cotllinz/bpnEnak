@@ -2,7 +2,7 @@
   <footer class="footerBpp mt-lg-5 mt-4">
     <b-container>
       <b-row>
-        <b-col col="12" class="text-center">
+        <b-col cols="12" class="text-center">
           <section class="mt-lg-5 mt-4 mb-3 mb-lg-4">
             <img
               class="icons_media mr-2"

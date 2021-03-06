@@ -25,6 +25,7 @@
             <button
               @mouseover="animationOn2 = true"
               @mouseleave="animationOn2 = false"
+              @click="onClickSearch"
               class="btn__subDistrict"
             >
               Balikpapan Tengah (44)
@@ -41,12 +42,14 @@
             <button
               @mouseover="animationOn3 = true"
               @mouseleave="animationOn3 = false"
+              @click="onClickSearch"
               class="btn__subDistrict"
             >
               Balikpapan Timur (27)
               <b-icon
                 class="icons_arrows"
                 :class="{ active: animationOn3 }"
+                @click="onClickSearch"
                 icon="arrow-right-short"
               ></b-icon>
             </button>
@@ -57,6 +60,7 @@
             <button
               @mouseover="animationOn4 = true"
               @mouseleave="animationOn4 = false"
+              @click="onClickSearch"
               class="btn__subDistrict"
             >
               Balikpapan Selatan (32)
@@ -73,6 +77,7 @@
             <button
               @mouseover="animationOn5 = true"
               @mouseleave="animationOn5 = false"
+              @click="onClickSearch"
               class="btn__subDistrict"
             >
               Balikpapan Utara (34)
@@ -89,6 +94,7 @@
             <button
               @mouseover="animationOn6 = true"
               @mouseleave="animationOn6 = false"
+              @click="onClickSearch"
               class="btn__subDistrict"
             >
               Balikpapan Barat (29)
