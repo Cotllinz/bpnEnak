@@ -165,8 +165,12 @@ export default {
     position: absolute;
     top: 40%;
     margin-left: -40px;
-
     transform: rotateZ(90deg);
+  }
+  @media (max-width: 400px) {
+    .slick {
+      min-width: 160vw;
+    }
   }
   @media (max-width: 393px) {
     .card {
