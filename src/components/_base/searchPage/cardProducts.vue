@@ -40,7 +40,11 @@
               >
             </div>
 
-            <button class="btn_visitRestaurant w-100 py-2">
+            <button
+              type="button"
+              @click="goToDetails"
+              class="btn_visitRestaurant w-100 py-2"
+            >
               Visit Restaurants
             </button>
           </section>
@@ -85,7 +89,11 @@
               >
             </div>
 
-            <button class="btn_visitRestaurant w-100 py-2">
+            <button
+              type="button"
+              @click="goToDetails"
+              class="btn_visitRestaurant w-100 py-2"
+            >
               Visit Restaurants
             </button>
           </section>
@@ -104,6 +112,11 @@ export default {
   data() {
     return {
       data: 6
+    }
+  },
+  methods: {
+    goToDetails() {
+      this.$router.push('/Foodetails')
     }
   }
 }

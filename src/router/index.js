@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import bppSearch from '../views/bppSearch.vue'
+import foodDetails from '../views/foodDetails.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -14,6 +15,11 @@ const routes = [
     path: '/Bppsearch',
     name: 'bppSearch',
     component: bppSearch
+  },
+  {
+    path: '/Foodetails',
+    name: 'foodDetails',
+    component: foodDetails
   }
 ]
 
