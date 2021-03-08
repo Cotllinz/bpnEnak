@@ -191,10 +191,10 @@ export default {
   filter: brightness(60%);
 }
 .slides_thumnail {
-  height: 170px;
+  height: 155px;
 }
 .images_thumnail_one {
-  height: 150px;
+  height: 155px;
   width: 320px;
   object-fit: cover;
   cursor: pointer;
@@ -203,7 +203,7 @@ export default {
   border-radius: 12px;
 }
 .images_thumnail_two {
-  height: 150px;
+  height: 155px;
   width: 100%;
   object-fit: cover;
   cursor: pointer;
@@ -212,7 +212,7 @@ export default {
   border-radius: 12px;
 }
 .images_thumnail {
-  height: 150px;
+  height: 155px;
   width: 100%;
   object-fit: cover;
   cursor: pointer;
