@@ -227,7 +227,7 @@ export default {
   box-shadow: none !important;
   border: none;
   padding: 0;
-  background: #f0f0f0;
+  background: #ffffff;
   font-size: 16px;
 }
 #rating-details {
@@ -235,7 +235,7 @@ export default {
   height: 10px;
 }
 .b-rating:focus {
-  background: #f0f0f0;
+  background: #ffffff;
 }
 .title_details h2 {
   font-weight: 700;

@@ -138,4 +138,9 @@ export default {
   margin: 0 auto;
   transform: translateY(-50%);
 }
+@media (max-width: 576px) {
+  .rating_desc p {
+    font-size: 14px;
+  }
+}
 </style>

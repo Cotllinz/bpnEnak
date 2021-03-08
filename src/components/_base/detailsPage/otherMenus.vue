@@ -2,7 +2,7 @@
   <section>
     <b-container>
       <hr class="mx-3 mb-0" />
-      <section class="title_menus pl-lg-2">
+      <section class="title_menus pl-lg-2 mt-2">
         <h4>Menu</h4>
       </section>
       <b-row class="pl-lg-2" cols-md="2" cols-lg="2" cols-xl="3">
@@ -74,6 +74,11 @@ export default {
   font-weight: 700;
   font-size: 18px;
 }
+.title_menus h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
 .btn_loadMore {
   display: block;
   margin: 0 auto;
@@ -89,15 +94,19 @@ export default {
   .card_images .card-img-left {
     min-width: 131px;
     height: 171px;
-   
   }
 }
 
 @media (max-width: 576px) {
- .card_images .card-img-left {
+  .card_images .card-img-left {
     min-width: 171px;
     height: 171px;
-   
+  }
+}
+@media (max-width: 393px) {
+  .card_images .card-img-left {
+    min-width: 131px;
+    height: 171px;
   }
 }
 </style>
