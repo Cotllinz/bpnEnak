@@ -2,7 +2,11 @@
   <section>
     <b-container>
       <b-row class="ter pl-2">
-        <b-col md="7" lg="8" class="revies_section pr-md-0 order-2 order-lg-1 mt-3 mt-lg-0">
+        <b-col
+          md="7"
+          lg="8"
+          class="revies_section pr-md-0 order-2 order-lg-1 mt-3 mt-lg-0"
+        >
           <section class="desc_restaurant d-none d-lg-block">
             <h5>Seafood</h5>
             <h5><span>Open</span> (Mon - Sat, 09:00 - 21:00)</h5>
