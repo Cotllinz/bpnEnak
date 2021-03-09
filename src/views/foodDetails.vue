@@ -4,6 +4,7 @@
     <main class="mainDetails">
       <imageSlider />
       <reviewsMaps />
+
       <reviews />
       <otherMenus />
     </main>
@@ -16,6 +17,7 @@ import footerBar from '@/components/footerBar.vue'
 import imageSlider from '@/components/_base/detailsPage/imageSlider.vue'
 import reviewsMaps from '@/components/_base/detailsPage/reviewsMaps.vue'
 import reviews from '@/components/_base/detailsPage/reviews.vue'
+
 import otherMenus from '@/components/_base/detailsPage/otherMenus.vue'
 export default {
   name: 'Foodetails',

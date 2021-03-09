@@ -6,6 +6,7 @@
         <p class="mt-1 mt-lg-0">
           New in the city with more variant and new taste is here.
         </p>
+        <button class="btn__showmore py-3">Show More</button>
       </section>
     </b-container>
     <b-container fluid>
@@ -32,7 +33,6 @@
               </b-card-text>
             </b-card>
           </section>
-          <button class="btn__showmore py-3">Show More</button>
         </VueSlickCarousel>
       </section>
     </b-container>
@@ -49,10 +49,15 @@ export default {
     return {
       data: 6,
       settings: {
-        infinite: false,
+        infinite: true,
         slidesToShow: 6,
         arrows: false,
         slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        pauseOnDotsHover: true,
+        pauseOnFocus: true,
+        pauseOnHover: true,
         responsive: [
           {
             breakpoint: 2999,
@@ -132,9 +137,9 @@ export default {
   border: none;
   color: #ffffff;
   background: #ff4545;
-  position: absolute;
+  /*  position: absolute;
   top: 50%;
-  transform: translate(10%, -50%);
+  transform: translate(10%, -50%); */
 }
 .btn__showmore:hover {
   background: #fd2a2a;
@@ -164,7 +169,7 @@ export default {
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
   }
   .slick {
-    min-width: 150vw;
+    min-width: 125vw;
   }
   .btn__showmore {
     width: 140px !important;
@@ -179,9 +184,9 @@ export default {
     margin-left: -40px;
     transform: rotateZ(90deg);
   }
-  @media (max-width: 400px) {
+  @media (max-width: 450px) {
     .slick {
-      min-width: 160vw;
+      min-width: 150vw;
     }
   }
   @media (max-width: 393px) {

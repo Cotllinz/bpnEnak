@@ -73,6 +73,7 @@ export default {
 </script>
 <style scoped>
 .labelCheckbox {
+  font-size: 15px;
   font-family: 'Poppins', sans-serif;
 }
 .checkBox {
@@ -87,9 +88,11 @@ export default {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 12px;
 }
+
 .card h2 {
   font-family: 'Arvo', serif;
   margin-bottom: 0;
+  font-size: 25px;
 }
 hr {
   margin-top: 0;

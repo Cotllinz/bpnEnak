@@ -123,8 +123,8 @@ export default {
 </script>
 <style scoped>
 .card_images .card-img-left {
-  min-width: 210px;
-  height: 230px;
+  min-width: 200px;
+  height: 210px;
   border-radius: 10px;
   object-fit: cover;
   object-position: 45%;
@@ -150,7 +150,11 @@ export default {
   font-size: 16px;
   font-weight: 700;
 }
+.label_revies{
+  font-size: 13px;
+}
 .desc_Food p {
+  font-size: 14px;
   margin-bottom: 0;
 }
 hr {

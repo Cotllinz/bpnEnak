@@ -121,13 +121,13 @@ export default {
 .btn_Onsearch {
   border: none;
   font-family: 'Poppins', sans-serif;
-  background: #2a5be2;
+  background: #2e4b9d;
   border-radius: 0 7px 7px 0;
   color: #ffffff;
   outline: none;
 }
 .btn_Onsearch:hover {
-  background: #2a5be2;
+  background: #2e4b9d;
 }
 .btn_singUp:hover {
   transition: 0.5s;

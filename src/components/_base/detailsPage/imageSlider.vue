@@ -17,7 +17,7 @@
                 class="mb-lg-2"
                 inline
                 color="#FCC400"
-                value="4.6"
+                value="3.6"
               ></b-form-rating>
               <label class="label_revies text-right" for="label_revies"
                 >(110 Reviews)</label
@@ -150,7 +150,7 @@ export default {
 </script>
 <style scoped>
 .slide {
-  height: 350px;
+  height: 320px;
   width: 100%;
   border-radius: 15px;
 }
@@ -158,7 +158,7 @@ export default {
   border-radius: 15px;
 }
 .images_main {
-  height: 350px;
+  height: 320px;
   border-radius: 15px;
   width: 100%;
   object-fit: cover;

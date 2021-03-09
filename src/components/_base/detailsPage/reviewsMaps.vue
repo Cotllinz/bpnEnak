@@ -41,11 +41,7 @@
             <b-card class="card_descResto">
               <section class="desc_resto">
                 <h5>Directions</h5>
-                <img
-                  class="images_example"
-                  src="../../../assets/Images/SecondaryThema/example_images.jpg"
-                  alt="images_maps"
-                />
+                <maps class="images_example" />
                 <p class="text-center mt-2">
                   Jl. Marsma R. Iswahyudi No.70, Gn. Bahagia, Kecamatan
                   Balikpapan Selatan, Kota Balikpapan, Kalimantan Timur
@@ -64,17 +60,17 @@
   </section>
 </template>
 <script>
-/* import maps from './maps' */
+import maps from './maps'
 export default {
   name: 'reviewsMaps',
   data() {
     return {
       phone: '082350775253'
     }
-  }
-  /*  components: {
+  },
+  components: {
     maps
-  } */
+  }
 }
 </script>
 
