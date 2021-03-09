@@ -150,7 +150,7 @@ export default {
   font-size: 16px;
   font-weight: 700;
 }
-.label_revies{
+.label_revies {
   font-size: 13px;
 }
 .desc_Food p {
