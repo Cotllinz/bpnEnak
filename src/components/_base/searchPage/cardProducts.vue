@@ -10,11 +10,12 @@
           :img-src="
             'https://images.unsplash.com/photo-1594030990808-ebd1c2247c28?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=696&q=80'
           "
+          @click="gotoFoodwithImage($event)"
           class="py-4 px-3 card_images align-items-center mb-4"
           img-alt="cardProduct"
           img-left
         >
-          <section class="desc_Food">
+          <section id="section" class="desc_Food">
             <section style="cursor:pointer;" @click="gotoFood">
               <h2>Kepiting Saus Khas Dandito</h2>
               <h5>Gn. Bahagia</h5>
@@ -62,6 +63,7 @@
           :img-src="
             'https://images.unsplash.com/photo-1594030990808-ebd1c2247c28?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=696&q=80'
           "
+          @click="gotoFoodwithImage($event)"
           class="py-4 px-3 d-block card_images align-items-center mb-4"
           img-alt="cardProduct"
           img-left
@@ -125,6 +127,11 @@ export default {
     },
     gotoFood() {
       this.$router.push('/fooDetails')
+    },
+    gotoFoodwithImage(e) {
+      if (e.toElement.alt === 'cardProduct') {
+        this.$router.push('/fooDetails')
+      }
     }
   }
 }
@@ -135,6 +142,7 @@ export default {
   height: 210px;
   border-radius: 10px;
   object-fit: cover;
+  cursor: pointer;
   object-position: 45%;
 }
 .card {
