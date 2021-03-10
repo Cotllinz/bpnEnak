@@ -22,11 +22,14 @@
                 value="4"
               ></b-form-rating>
               <div class="reviews_area position-relative">
-                <b-form-textarea
-                  placeholder="Write a Review here..."
-                  rows="7"
-                ></b-form-textarea>
-                <button class="btn_sendReview py-2 px-5">Give Review</button>
+                <section class="wrapper_textarea">
+                  <b-form-textarea
+                    placeholder="Write a Review here..."
+                    rows="5"
+                    maxlength="170"
+                  ></b-form-textarea>
+                  <button class="btn_sendReview py-2 px-5">Give Review</button>
+                </section>
               </div>
             </b-card>
           </section>
@@ -44,7 +47,7 @@
                 <maps class="images_example" />
                 <p class="text-center mt-2">
                   Jl. Marsma R. Iswahyudi No.70, Gn. Bahagia, Kecamatan
-                  Balikpapan Selatan, Kota Balikpapan, Kalimantan Timur
+                  Balikpapan Selatan, Kota Balikpapan, Kalimantan Timur 76114
                 </p>
                 <h5 class="mb-0">
                   Call
@@ -89,8 +92,7 @@ export default {
 }
 .images_example {
   width: 100%;
-  height: 150px;
-  object-fit: cover;
+  height: 180px;
 }
 .desc_restaurant h5,
 .desc_restaurant p {
@@ -101,9 +103,9 @@ export default {
   font-family: 'Poppins', sans-serif;
 }
 .desc_resto p {
-  height: 100px;
-  max-height: 100px;
-  transform: translateY(20%);
+  height: 75px;
+  max-height: 75px;
+  font-size: 15px;
 }
 
 .desc_resto a {
@@ -140,13 +142,24 @@ export default {
 }
 textarea:focus {
   background: #eaeaea;
+  border: none;
 }
 textarea {
   background: #eaeaea;
   resize: none;
-  outline: none;
-  border: 1px solid #ccc;
+  border: none;
   box-shadow: none !important;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+textarea::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper_textarea {
+  max-height: 185px;
+  border: 1px solid #ccc;
+  background: #eaeaea;
 }
 .btn_sendReview {
   border: none;
@@ -157,7 +170,6 @@ textarea {
   left: 0;
   margin: 0 auto 10px;
   right: 0;
-  position: absolute;
 }
 .btn_sendReview:hover {
   background: #fafafa;

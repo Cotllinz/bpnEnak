@@ -15,14 +15,17 @@
           img-left
         >
           <section class="desc_Food">
-            <h2>Kepiting Saus Khas Dandito</h2>
-            <h5>Gn. Bahagia</h5>
-            <hr />
-            <p>
-              Jl. Marsma R. Iswahyudi No.70, Gn. Bahagia, Kecamatan Balikpapan
-              Selatan, Kota Balikpapan, Kalimantan Timur
-            </p>
-            <p>Open Hours 09:00 - 21:00</p>
+            <section style="cursor:pointer;" @click="gotoFood">
+              <h2>Kepiting Saus Khas Dandito</h2>
+              <h5>Gn. Bahagia</h5>
+              <hr />
+              <p>
+                Jl. Marsma R. Iswahyudi No.70, Gn. Bahagia, Kecamatan Balikpapan
+                Selatan, Kota Balikpapan, Kalimantan Timur
+              </p>
+              <p>Open Hours 09:00 - 21:00</p>
+            </section>
+
             <div class="d-flex align-items-center">
               <b-form-rating
                 id="rating-dekstops"
@@ -64,14 +67,16 @@
           img-left
         >
           <section class="desc_Food mt-2">
-            <h2>Kepiting Saus Khas Dandito</h2>
-            <h5>Gn. Bahagia</h5>
-            <hr />
-            <p>
-              Jl. Marsma R. Iswahyudi No.70, Gn. Bahagia, Kecamatan Balikpapan
-              Selatan, Kota Balikpapan, Kalimantan Timur
-            </p>
-            <p>Open Hours 09:00 - 21:00</p>
+            <section style="cursor:pointer;" @click="gotoFood">
+              <h2>Kepiting Saus Khas Dandito</h2>
+              <h5>Gn. Bahagia</h5>
+              <hr />
+              <p>
+                Jl. Marsma R. Iswahyudi No.70, Gn. Bahagia, Kecamatan Balikpapan
+                Selatan, Kota Balikpapan, Kalimantan Timur
+              </p>
+              <p>Open Hours 09:00 - 21:00</p>
+            </section>
             <div class="d-flex align-items-center">
               <b-form-rating
                 id="rating-mobile"
@@ -116,7 +121,10 @@ export default {
   },
   methods: {
     goToDetails() {
-      this.$router.push('/Foodetails')
+      this.$router.push('/restoDetails')
+    },
+    gotoFood() {
+      this.$router.push('/fooDetails')
     }
   }
 }

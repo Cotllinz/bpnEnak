@@ -1,36 +1,25 @@
 <template>
   <div class="foodDetails">
-    <navBar :onScroll="false" />
-    <main class="mainDetails">
-      <imageSlider />
-      <reviewsMaps />
-
-      <reviews />
-      <otherMenus />
+    <navigationBar :onScroll="false" />
+    <main class="foodMain">
+      <imageCaraousel />
+      <menusInformation />
     </main>
     <footerBar />
   </div>
 </template>
 <script>
-import navBar from '@/components/navigationBar.vue'
+import navigationBar from '@/components/navigationBar.vue'
 import footerBar from '@/components/footerBar.vue'
-import imageSlider from '@/components/_base/detailsPage/imageSlider.vue'
-import reviewsMaps from '@/components/_base/detailsPage/reviewsMaps.vue'
-import reviews from '@/components/_base/detailsPage/reviews.vue'
-
-import otherMenus from '@/components/_base/detailsPage/otherMenus.vue'
+import imageCaraousel from '@/components/_base/foodDetailsPage/foodDetailsCaraousel.vue'
+import menusInformation from '@/components/_base/foodDetailsPage/menusInformation.vue'
 export default {
-  name: 'Foodetails',
+  name: 'foodetails',
   components: {
-    navBar,
+    navigationBar,
     footerBar,
-    imageSlider,
-    reviewsMaps,
-    reviews,
-    otherMenus
-  },
-  created() {
-    window.scrollTo(0, 0)
+    imageCaraousel,
+    menusInformation
   }
 }
 </script>
@@ -38,7 +27,8 @@ export default {
 .foodDetails {
   background: #ffffff;
 }
-.mainDetails {
+.foodMain {
   padding-top: 110px;
+  height: 2000px;
 }
 </style>

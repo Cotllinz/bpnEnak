@@ -1,12 +1,14 @@
 <template>
-  <section class="main mt-lg-4 mt-3">
+  <section class="main mt-lg-4 mt-3 ">
     <b-container>
-      <section class="title__newTaste">
-        <h3>New Taste</h3>
-        <p class="mt-1 mt-lg-0">
-          New in the city with more variant and new taste is here.
-        </p>
-        <button class="btn__showmore py-3">Show More</button>
+      <section class="title__newTaste d-flex align-items-end">
+        <div>
+          <h3>New Taste</h3>
+          <p class="mt-1 mt-lg-0">
+            New in the city with more variant and new taste is here.
+          </p>
+        </div>
+        <button class="btn__showmore ml-auto px-lg-3 mb-4">Show More</button>
       </section>
     </b-container>
     <b-container fluid>
@@ -130,16 +132,13 @@ export default {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
 .btn__showmore {
-  width: 140px !important;
   font-family: 'Poppins', sans-serif;
   border-radius: 13px;
   font-weight: 700;
   border: none;
+  height: 40px;
   color: #ffffff;
   background: #ff4545;
-  /*  position: absolute;
-  top: 50%;
-  transform: translate(10%, -50%); */
 }
 .btn__showmore:hover {
   background: #fd2a2a;
@@ -171,18 +170,13 @@ export default {
   .slick {
     min-width: 125vw;
   }
+  .title__newTaste p {
+    font-size: 14px;
+  }
   .btn__showmore {
-    width: 140px !important;
-    font-family: 'Poppins', sans-serif;
-    border-radius: 13px;
-    font-weight: 700;
-    border: none;
-    color: #ffffff;
-    background: #ff4545;
-    position: absolute;
-    top: 40%;
-    margin-left: -40px;
-    transform: rotateZ(90deg);
+    font-size: 15px;
+    width: 150px !important;
+    height: 40px;
   }
   @media (max-width: 450px) {
     .slick {
@@ -195,6 +189,10 @@ export default {
       border-radius: 10px;
       margin-bottom: 17px;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+    }
+    .btn__showmore {
+      font-size: 14px;
+      height: 40px;
     }
     .slick {
       min-width: 135vw;

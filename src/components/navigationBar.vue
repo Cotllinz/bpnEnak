@@ -163,7 +163,7 @@ input[type='text'] {
     width: 440px;
   }
 }
-@media (max-width: 990px) {
+@media (max-width: 991px) {
   .search__Input {
     width: 300px;
   }
