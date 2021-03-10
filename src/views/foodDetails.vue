@@ -23,6 +23,9 @@ export default {
     imageCaraousel,
     menusInformation,
     otherMenus
+  },
+  created() {
+    window.scrollTo(0, 0)
   }
 }
 </script>
