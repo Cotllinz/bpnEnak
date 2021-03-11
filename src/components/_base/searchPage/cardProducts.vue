@@ -1,15 +1,14 @@
 <template>
-  <section class="mt-lg-3">
+  <section class="mt-lg-3 images_card">
     <b-row cols="1">
+      <h1 class="notFound text-center" v-if="errorSearch">Gak nemu blay :(</h1>
       <b-col
         class="d-none d-lg-block"
-        v-for="(items, index) in data"
+        v-for="(items, index) in foods"
         :key="'Dekstop' + index"
       >
         <b-card
-          :img-src="
-            'https://images.unsplash.com/photo-1594030990808-ebd1c2247c28?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=696&q=80'
-          "
+          :img-src="`${imageUrl}menu/${items.image.image_name}`"
           @click="gotoFoodwithImage($event)"
           class="py-4 px-3 card_images align-items-center mb-4"
           img-alt="cardProduct"
@@ -17,14 +16,16 @@
         >
           <section id="section" class="desc_Food">
             <section style="cursor:pointer;" @click="gotoFood">
-              <h2>Kepiting Saus Khas Dandito</h2>
-              <h5>Gn. Bahagia</h5>
+              <h2>{{ items.menu_name }}</h2>
+              <h5>{{ items.resto_kelurahan }}</h5>
               <hr />
               <p>
-                Jl. Marsma R. Iswahyudi No.70, Gn. Bahagia, Kecamatan Balikpapan
-                Selatan, Kota Balikpapan, Kalimantan Timur
+                {{ items.resto_address }}
               </p>
-              <p>Open Hours 09:00 - 21:00</p>
+              <p>
+                Open Hours {{ items.resto_open_hour.slice(0, 5) }} -
+                {{ items.resto_close_hour.slice(0, 5) }}
+              </p>
             </section>
 
             <div class="d-flex align-items-center">
@@ -37,10 +38,10 @@
                 class="mb-lg-2"
                 inline
                 color="#FCC400"
-                value="3.544"
+                :value="items.rating"
               ></b-form-rating>
               <label class="label_revies" for="label_revies"
-                >(110 Reviews)</label
+                >({{ items.review_by }} Reviews)</label
               >
             </div>
 
@@ -55,14 +56,12 @@
         </b-card>
       </b-col>
       <b-col
-        v-for="(items, index) in data"
+        v-for="(items, index) in foods"
         :key="'Mobile' + index"
         class="d-block d-lg-none"
       >
         <b-card
-          :img-src="
-            'https://images.unsplash.com/photo-1594030990808-ebd1c2247c28?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=696&q=80'
-          "
+          :img-src="`${imageUrl}menu/${items.image.image_name}`"
           @click="gotoFoodwithImage($event)"
           class="py-4 px-3 d-block card_images align-items-center mb-4"
           img-alt="cardProduct"
@@ -70,14 +69,16 @@
         >
           <section class="desc_Food mt-2">
             <section style="cursor:pointer;" @click="gotoFood">
-              <h2>Kepiting Saus Khas Dandito</h2>
-              <h5>Gn. Bahagia</h5>
+              <h2>{{ items.menu_name }}</h2>
+              <h5>{{ items.resto_kelurahan }}</h5>
               <hr />
               <p>
-                Jl. Marsma R. Iswahyudi No.70, Gn. Bahagia, Kecamatan Balikpapan
-                Selatan, Kota Balikpapan, Kalimantan Timur
+                {{ items.resto_address }}
               </p>
-              <p>Open Hours 09:00 - 21:00</p>
+              <p>
+                Open Hours {{ items.resto_open_hour.slice(0, 5) }} -
+                {{ items.resto_close_hour.slice(0, 5) }}
+              </p>
             </section>
             <div class="d-flex align-items-center">
               <b-form-rating
@@ -89,10 +90,10 @@
                 class="mb-lg-2"
                 inline
                 color="#FCC400"
-                value="4"
+                :value="items.rating"
               ></b-form-rating>
               <label class="label_revies" for="label_revies"
-                >(110 Reviews)</label
+                >({{ items.review_by }} Reviews)</label
               >
             </div>
 
@@ -108,25 +109,57 @@
       </b-col>
 
       <b-col>
-        <button class="btn_loadMore py-2 px-5">Load More</button>
+        <button
+          v-if="!errorSearch"
+          @click="setMore"
+          class="btn_loadMore py-2 px-5"
+        >
+          Load More
+        </button>
       </b-col>
     </b-row>
   </section>
 </template>
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'FoodsCard',
   data() {
     return {
-      data: 6
+      imageUrl: process.env.VUE_APP_URL_IMAGE
     }
   },
+  computed: {
+    ...mapGetters({
+      foods: 'getFoods',
+      errorSearch: 'getErrorSearch',
+      getTotalData: 'getTotalData'
+    })
+  },
+  created() {
+    this.sortingFoods()
+      .then(res => {
+        if (res) {
+          this.setErrorFood(false)
+        }
+      })
+      .catch(err => {
+        if (err) {
+          this.setErrorFood(true)
+        }
+      })
+  },
   methods: {
+    ...mapActions(['sortingFoods']),
+    ...mapMutations(['setErrorFood', 'setLimit']),
     goToDetails() {
       this.$router.push('/restoDetails')
     },
     gotoFood() {
       this.$router.push('/fooDetails')
+    },
+    setMore() {
+      this.setLimit()
     },
     gotoFoodwithImage(e) {
       if (e.toElement.alt === 'cardProduct') {
@@ -138,18 +171,29 @@ export default {
 </script>
 <style scoped>
 .card_images .card-img-left {
-  min-width: 200px;
+  width: 200px;
+  max-width: 200px;
   height: 210px;
   border-radius: 10px;
   object-fit: cover;
   cursor: pointer;
   object-position: 45%;
 }
+
 .card {
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
 }
-
+.notFound {
+  font-family: 'Poppins', sans-serif;
+  font-size: 35px;
+  font-weight: 500;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
 .card-body {
   padding: 0 0 0 20px;
 }
@@ -205,7 +249,8 @@ hr {
 }
 @media (max-width: 990px) {
   .card_images .card-img-left {
-    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
     height: 230px;
     border-radius: 10px;
     object-fit: cover;

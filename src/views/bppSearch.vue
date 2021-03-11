@@ -5,7 +5,11 @@
       <b-container>
         <section class="desc_titleSearch">
           <h3>Balikpapan’s Restaurants</h3>
-          <h5>Search results for “all”</h5>
+          <h5>
+            Search results for “{{
+              getParams.searchName ? getParams.searchName : 'all'
+            }}”
+          </h5>
         </section>
         <b-row>
           <b-col cols="4" lg="4" class="d-none d-md-block">
@@ -25,6 +29,7 @@ import navBar from '@/components/navigationBar.vue'
 import footerBar from '@/components/footerBar.vue'
 import searchFilter from '@/components/_base/searchPage/subFilterSearch.vue'
 import cardProduct from '@/components/_base/searchPage/cardProducts.vue'
+import { mapGetters } from 'vuex'
 export default {
   name: 'bppSearch',
   components: {
@@ -32,6 +37,9 @@ export default {
     searchFilter,
     cardProduct,
     footerBar
+  },
+  computed: {
+    ...mapGetters(['getParams'])
   },
   created() {
     window.scrollTo(0, 0)
@@ -41,10 +49,10 @@ export default {
 <style scoped>
 .bppSearch {
   background: #f0f0f0;
-  /*   height: 3000px; */
 }
 .main_details {
   padding-top: 110px;
+  min-height: 100vh;
 }
 .desc_titleSearch h3 {
   font-family: 'Arvo', serif;

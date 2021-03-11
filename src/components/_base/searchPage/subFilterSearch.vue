@@ -27,46 +27,89 @@
       <section>
         <label class="labelCheckboxList" for="District">District</label>
         <b-form-checkbox
-          v-model="form.District"
-          value="Balikpapan Kota"
+          v-model="getParams.district"
+          value="balikpapan kota"
+          @change="searchFilter"
           unchecked-value=""
           aria-label="labels"
         >
           <label class="labelCheckbox" for="labels">Balikpapan Kota</label>
         </b-form-checkbox>
         <b-form-checkbox
-          v-model="form.District"
-          value="Balikpapan Utara"
+          v-model="getParams.district"
+          @change="searchFilter"
+          value="balikpapan utara"
           unchecked-value=""
         >
           <label class="labelCheckbox" for="labels">Balikpapan Utara</label>
         </b-form-checkbox>
         <b-form-checkbox
-          v-model="form.District"
-          value="Balikpapan Barat"
+          v-model="getParams.district"
+          @change="searchFilter"
+          value="balikpapan barat"
           unchecked-value=""
         >
           <label class="labelCheckbox" for="labels">Balikpapan Barat</label>
+        </b-form-checkbox>
+        <b-form-checkbox
+          v-model="getParams.district"
+          @change="searchFilter"
+          value="balikpapan tengah"
+          unchecked-value=""
+        >
+          <label class="labelCheckbox" for="labels">Balikpapan Tengah</label>
+        </b-form-checkbox>
+        <b-form-checkbox
+          v-model="getParams.district"
+          @change="searchFilter"
+          value="balikpapan timur"
+          unchecked-value=""
+        >
+          <label class="labelCheckbox" for="labels">Balikpapan Timur</label>
+        </b-form-checkbox>
+        <b-form-checkbox
+          v-model="getParams.district"
+          @change="searchFilter"
+          value="balikpapan selatan"
+          unchecked-value=""
+        >
+          <label class="labelCheckbox" for="labels">Balikpapan Selatan</label>
         </b-form-checkbox>
       </section>
     </b-card>
   </section>
 </template>
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Filtering',
   data() {
     return {
       form: {
         type: '',
-        Price: '',
-        District: ''
+        Price: ''
       }
     }
   },
+  computed: {
+    ...mapGetters({ getParams: 'getParams' })
+  },
   methods: {
-    checked() {
-      console.log(this.form.District)
+    ...mapActions(['sortingFoods']),
+    ...mapMutations(['setDistrict', 'setErrorFood']),
+    searchFilter(event) {
+      this.setDistrict(event)
+      this.sortingFoods()
+        .then(res => {
+          if (res) {
+            this.setErrorFood(false)
+          }
+        })
+        .catch(err => {
+          if (err) {
+            this.setErrorFood(true)
+          }
+        })
     }
   }
 }
