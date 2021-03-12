@@ -16,7 +16,7 @@
           <b-form-input
             type="text"
             autocomplete="off"
-            v-model="seachName"
+            v-model="searchFoods"
             @keyup.enter="searchFood"
             placeholder="Specify your taste"
             maxlength="30"
@@ -63,20 +63,21 @@ export default {
   data() {
     return {
       imageUrl: process.env.VUE_APP_URL_IMAGE,
-      seachName: ''
+      searchFoods: ''
     }
   },
   computed: {
-    ...mapGetters({ restoTop: 'getBestResto' })
+    ...mapGetters({ restoTop: 'getBestResto', getParams: 'getParams' })
   },
   created() {
     this.BestResto()
   },
   methods: {
     ...mapActions(['BestResto']),
-    ...mapMutations(['setSearch']),
+    ...mapMutations(['restartLimit', 'resetOnSearch']),
     searchFood() {
-      this.setSearch(this.seachName)
+      this.restartLimit()
+      this.resetOnSearch(this.searchFoods)
       this.$router.push('/Bppsearch')
     }
   }

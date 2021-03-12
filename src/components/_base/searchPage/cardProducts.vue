@@ -14,8 +14,8 @@
           img-alt="cardProduct"
           img-left
         >
-          <section id="section" class="desc_Food">
-            <section style="cursor:pointer;" @click="gotoFood">
+          <section class="desc_Food">
+            <section style="cursor:pointer;" @click="gotoFood(items)">
               <h2>{{ items.menu_name }}</h2>
               <h5>{{ items.resto_kelurahan }}</h5>
               <hr />
@@ -108,9 +108,9 @@
         </b-card>
       </b-col>
 
-      <b-col>
+      <b-col v-if="!errorSearch">
         <button
-          v-if="!errorSearch"
+          v-if="showButton"
           @click="setMore"
           class="btn_loadMore py-2 px-5"
         >
@@ -133,8 +133,16 @@ export default {
     ...mapGetters({
       foods: 'getFoods',
       errorSearch: 'getErrorSearch',
-      getTotalData: 'getTotalData'
-    })
+      getTotalData: 'getTotalData',
+      getSumData: 'getSumData'
+    }),
+    showButton() {
+      if (this.getSumData > 6 && this.getTotalData > 0) {
+        return true
+      } else {
+        return false
+      }
+    }
   },
   created() {
     this.sortingFoods()
@@ -155,8 +163,18 @@ export default {
     goToDetails() {
       this.$router.push('/restoDetails')
     },
-    gotoFood() {
-      this.$router.push('/fooDetails')
+    gotoFood(items) {
+      const foodName = items.menu_name.replace(/\s/g, '')
+      this.$router.push({
+        name: 'fooDetails',
+        params: {
+          idFood: items.menu_id
+        },
+        query: {
+          restoId: items.resto.resto_id,
+          foodName: foodName
+        }
+      })
     },
     setMore() {
       this.setLimit()

@@ -5,22 +5,47 @@
       <hr />
       <section>
         <label class="labelCheckboxList" for="types">Type</label>
-        <b-form-checkbox v-model="form.type" value="Drink" unchecked-value="">
+        <b-form-checkbox
+          v-model="getParams.type"
+          @change="searchFilter"
+          value="drinks"
+          unchecked-value=""
+        >
           <label class="labelCheckbox" for="labels">Drink</label>
         </b-form-checkbox>
-        <b-form-checkbox v-model="form.type" value="Food" unchecked-value="">
+        <b-form-checkbox
+          v-model="getParams.type"
+          @change="searchFilter"
+          value="foods"
+          unchecked-value=""
+        >
           <label class="labelCheckbox" for="labels">Food</label>
         </b-form-checkbox>
       </section>
       <section>
         <label class="labelCheckboxList" for="Price">Price</label>
-        <b-form-checkbox v-model="form.Price" value="Low" unchecked-value="">
+        <b-form-checkbox
+          v-model="getParams.price"
+          @change="searchFilter"
+          value="low"
+          unchecked-value=""
+        >
           <label class="labelCheckbox" for="labels">Low</label>
         </b-form-checkbox>
-        <b-form-checkbox v-model="form.Price" value="Medium" unchecked-value="">
+        <b-form-checkbox
+          v-model="getParams.price"
+          @change="searchFilter"
+          value="mid"
+          unchecked-value=""
+        >
           <label class="labelCheckbox" for="labels">Medium</label>
         </b-form-checkbox>
-        <b-form-checkbox v-model="form.Price" value="High" unchecked-value="">
+        <b-form-checkbox
+          v-model="getParams.price"
+          @change="searchFilter"
+          value="high"
+          unchecked-value=""
+        >
           <label class="labelCheckbox" for="labels">High</label>
         </b-form-checkbox>
       </section>
@@ -84,21 +109,16 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Filtering',
   data() {
-    return {
-      form: {
-        type: '',
-        Price: ''
-      }
-    }
+    return {}
   },
   computed: {
     ...mapGetters({ getParams: 'getParams' })
   },
   methods: {
     ...mapActions(['sortingFoods']),
-    ...mapMutations(['setDistrict', 'setErrorFood']),
-    searchFilter(event) {
-      this.setDistrict(event)
+    ...mapMutations(['restartLimit', 'setErrorFood']),
+    searchFilter() {
+      this.restartLimit()
       this.sortingFoods()
         .then(res => {
           if (res) {

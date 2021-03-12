@@ -30,9 +30,9 @@
             </template>
             <b-form-input
               type="text"
-              v-model.lazy="searchName"
-              @keyup.enter="searchFood"
-              @keyup="searchLive"
+              v-model.lazy="getParams.searchName"
+              @keyup.enter="searchFood($event)"
+              @keyup="searchFood($event)"
               placeholder="Specify your taste"
               maxlength="30"
             ></b-form-input>
@@ -69,24 +69,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ getParams: 'getParams' }),
-    searchName: {
-      get() {
-        return this.getParams.searchName
-      },
-      set(searchBar) {
-        return (this.search = searchBar)
-      }
-    }
+    ...mapGetters({ getParams: 'getParams' })
   },
   methods: {
-    ...mapMutations(['setSearch', 'setErrorFood']),
+    ...mapMutations(['restartLimit', 'setErrorFood']),
     ...mapActions(['sortingFoods']),
     updateScroll() {
       this.scrollPosition = window.scrollY
     },
-    searchFood() {
-      this.setSearch(this.search)
+    searchFood(e) {
+      this.restartLimit()
       this.sortingFoods()
         .then(res => {
           if (res) {
@@ -98,22 +90,9 @@ export default {
             this.setErrorFood(true)
           }
         })
-      this.$router.push('/Bppsearch').catch(() => {})
-    },
-
-    searchLive() {
-      this.setSearch(this.search)
-      this.sortingFoods()
-        .then(res => {
-          if (res) {
-            this.setErrorFood(false)
-          }
-        })
-        .catch(err => {
-          if (err) {
-            this.setErrorFood(true)
-          }
-        })
+      if (e.key === 'Enter') {
+        this.$router.push('/Bppsearch').catch(() => {})
+      }
     },
     onHome() {
       this.$router.push('/')

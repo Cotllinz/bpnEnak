@@ -9,25 +9,43 @@ export default {
       type: ''
     },
     errorSearch: false,
+    sumData: 0,
     totalData: 0,
     limit: 6
   },
   mutations: {
     setFood(state, payload) {
       state.foods = payload.data
-      state.totalData = state.foods.length
+      state.sumData = state.foods.length
+      state.totalData = state.foods.length - 6
     },
-    setSearch(state, payload) {
+
+    restartLimit(state) {
+      state.limit = 6
+    },
+    resetOnSearch(state, payload) {
+      state.searchParams = {
+        searchName: '',
+        price: '',
+        type: '',
+        district: ''
+      }
       state.searchParams.searchName = payload
     },
-    setDistrict(state, payload) {
+    resetOnDistrict(state, payload) {
+      state.searchParams = {
+        searchName: '',
+        price: '',
+        type: '',
+        district: ''
+      }
       state.searchParams.district = payload
     },
     setLimit(state) {
       if (state.totalData > state.limit) {
         state.limit += 6
-        state.totalData -= state.limit
-      } else if (state.totalData < 6) {
+        state.totalData -= 6
+      } else if (state.totalData <= 6) {
         state.limit += state.totalData
         state.totalData -= state.totalData
       }
@@ -51,10 +69,10 @@ export default {
           .then(res => {
             context.commit('setFood', res.data)
             resolve(res)
-            console.clear()
+            /*             console.clear() */
           })
           .catch(err => {
-            console.clear()
+            /*   console.clear() */
             reject(err.response)
           })
       })
@@ -72,6 +90,9 @@ export default {
     },
     getTotalData(state) {
       return state.totalData
+    },
+    getSumData(state) {
+      return state.sumData
     }
   }
 }

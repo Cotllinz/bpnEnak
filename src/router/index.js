@@ -23,7 +23,7 @@ const routes = [
     component: restoDetails
   },
   {
-    path: '/fooDetails',
+    path: '/fooDetails/:idFood',
     name: 'fooDetails',
     component: fooDetails
   }

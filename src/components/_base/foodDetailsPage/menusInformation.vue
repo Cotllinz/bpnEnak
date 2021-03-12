@@ -1,26 +1,30 @@
 <template>
   <section>
-    <b-container>
+    <b-container v-if="LoadingResto">
       <div class="title_menus mt-2 d-md-flex align-items-center">
-        <h4>Creamy Yakitori Pizza</h4>
-        <h2 class="ml-auto">Rp. 54.000</h2>
+        <h4>{{ menu.menu_name }}</h4>
+        <h2 class="ml-auto">Rp. {{ formatPrice(menu.menu_price) }}</h2>
       </div>
       <b-row>
         <b-col md="3">
           <section class="restoImages mt-2 mt-md-0">
             <img
-              src="https://images.unsplash.com/photo-1559941003-4f656f95b734?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=671&q=80"
+              :src="`${imageUrl}resto/${resto.resto_image[0].image_name}`"
               alt="images_resto"
             />
           </section>
         </b-col>
         <b-col md="9">
           <section class="desc_resto">
-            <h2>Caffe Bro Bro Gore</h2>
-            <h4><span>Open</span> (Mon - Sat, 09:00 - 21:00)</h4>
+            <h2>{{ resto.resto_name }}</h2>
+            <h4>
+              <span>Open</span> ({{ UpperResto(resto.resto_open_day) }} -
+              {{ UpperResto(resto.resto_close_day) }},
+              {{ formatDate(resto.resto_open_hour) }} -
+              {{ formatDate(resto.resto_close_hour) }}
+            </h4>
             <p>
-              Jl. Soekarno-Hatta Km.8 RT 37, Batu Ampar, Kec. Balikpapan Utara,
-              Kota Balikpapan, Kota Balikpapan, Kalimantan Timur
+              {{ resto.resto_address }}
             </p>
           </section>
           <div class="rating__resto">
@@ -31,11 +35,11 @@
               inline
               precision="2"
               color="#FCC400"
-              value="4"
+              :value="resto.rating"
               readonly
             >
             </b-form-rating>
-            <p>110 reviews</p>
+            <p>{{ resto.review_by }} reviews</p>
           </div>
           <button type="button" class="py-2 px-5 btn_visitResto">Visit</button>
         </b-col>
@@ -45,8 +49,44 @@
   </section>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
-  name: 'menusInformation'
+  name: 'menusInformation',
+  computed: {
+    ...mapGetters({
+      menu: 'getMenu',
+      resto: 'getResto',
+      LoadingResto: 'getLoadingResto'
+    })
+  },
+  data() {
+    return {
+      imageUrl: process.env.VUE_APP_URL_IMAGE
+    }
+  },
+  created() {
+    this.menuData(this.$route.params.idFood)
+    this.restoData(this.$route.query.restoId)
+  },
+  methods: {
+    ...mapActions(['menuData', 'restoData']),
+    formatPrice(value) {
+      if (value) {
+        const val = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+        return val
+      }
+    },
+    UpperResto(value) {
+      if (value) {
+        return value.charAt(0).toUpperCase() + value.slice(1, 3)
+      }
+    },
+    formatDate(value) {
+      if (value) {
+        return value.slice(0, 5)
+      }
+    }
+  }
 }
 </script>
 <style scoped>
@@ -60,6 +100,7 @@ export default {
   width: 100%;
   object-fit: cover;
   object-position: 45%;
+  height: 300px;
   max-height: 300px;
   border-radius: 6px;
 }
