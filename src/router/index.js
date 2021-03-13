@@ -7,6 +7,7 @@ import fooDetails from '../views/foodDetails.vue'
 import login from '../views/auth/login.vue'
 import signup from '../views/auth/signup.vue'
 import reset from '../views/auth/reset.vue'
+import forgot from '../views/auth/forgot.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/reset/:key',
     name: 'reset',
     component: reset
+  },
+  {
+    path: '/forgot',
+    name: 'forgot',
+    component: forgot
   }
 ]
 
