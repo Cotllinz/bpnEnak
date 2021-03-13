@@ -1,6 +1,6 @@
 <template>
-  <section>
-    <b-container v-if="loadingResto">
+  <section v-if="loadingResto">
+    <b-container>
       <b-row>
         <b-col cols="12">
           <section
@@ -31,7 +31,6 @@
               class="images__view"
               ref="main"
               :options="options1"
-              :navButtons="resto.resto_image.length > 1 ? true : false"
               :as-nav-for="viewImage"
             >
               <div
@@ -61,7 +60,6 @@
             <agile
               class="thumbnails mt-3"
               ref="thumbnails"
-              :infinite="resto.resto_image.length > 1 ? true : false"
               :options="options2"
               :as-nav-for="thumbnailImaes"
             >
@@ -105,13 +103,15 @@ export default {
       thumbnailImaes: [],
       options1: {
         dots: false,
-        fade: true
+        fade: true,
+        navButtons: true
       },
       options2: {
         centerMode: true,
         dots: false,
         navButtons: false,
         slidesToShow: 3,
+        infinite: true,
         responsive: [
           {
             breakpoint: 100,
@@ -137,8 +137,18 @@ export default {
   created() {
     this.restoData(this.$route.params.idResto).then(() => {
       this.lenghtImage = this.resto.resto_image.length
+      /*  this.show = true */
       this.viewImage.push(this.$refs.thumbnails)
       this.thumbnailImaes.push(this.$refs.main)
+      /*   if (this.show) {
+        if (this.lenghtImage > 2) {
+          this.options2.infinite = true
+          this.options2.slidesToShow = 3
+        } else if (this.lenghtImage > 1) {
+          this.options2.infinite = true
+          this.options2.responsive[1].settings.slidesToShow = 2
+        }
+      } */
     })
   },
 

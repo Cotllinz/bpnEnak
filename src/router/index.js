@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import bppSearch from '../views/bppSearch.vue'
-import restoDetails from '../views/restoDetails.vue'
+
 import fooDetails from '../views/foodDetails.vue'
 Vue.use(VueRouter)
 
@@ -20,7 +20,7 @@ const routes = [
   {
     path: '/restoDetails/:idResto',
     name: 'restoDetails',
-    component: restoDetails
+    component: () => import('../views/restoDetails.vue')
   },
   {
     path: '/fooDetails/:idFood',

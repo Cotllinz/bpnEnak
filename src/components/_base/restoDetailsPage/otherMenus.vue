@@ -1,27 +1,24 @@
 <template>
-  <section>
+  <section v-if="LoadingMenu">
     <b-container>
       <hr class="mx-3 mb-0" />
       <section class="title_menus pl-lg-2 mt-2">
         <h4>Menu</h4>
       </section>
       <b-row class="pl-lg-2" cols-md="2" cols-lg="2" cols-xl="3">
-        <b-col v-for="(items, index) in data" :key="index" class="pr-lg-0">
+        <b-col v-for="(items, index) in menuData" :key="index" class="pr-lg-0">
           <b-card
-            :img-src="
-              'https://images.unsplash.com/photo-1594030990808-ebd1c2247c28?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=696&q=80'
-            "
+            :img-src="`${imageUrl}menu/${items.menu_image[0].image_name}`"
             class="py-lg-2 py-3 px-3 card_images align-items-center mb-4"
             img-alt="cardProduct"
             img-left
           >
             <section class="desc_Food">
-              <h2>Kepiting Saus Khas Dandito</h2>
+              <h2>{{ items.menu_name }}</h2>
               <p>
-                Kepiting rebus segar dengan saus asam manis yang menggugah
-                selera siapapun yang memakannya
+                {{ items.menu_desc.slice(0, 110) + ',...' }}
               </p>
-              <h5>Rp. 74.000</h5>
+              <h5>Rp. {{ formatPrice(items.menu_price) }}</h5>
             </section>
           </b-card>
         </b-col>
@@ -31,11 +28,30 @@
   </section>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'otherMenus',
   data() {
     return {
-      data: 6
+      imageUrl: process.env.VUE_APP_URL_IMAGE
+    }
+  },
+  computed: {
+    ...mapGetters({
+      menuData: 'getMenuList',
+      LoadingMenu: 'getLoadingMenuList'
+    })
+  },
+  created() {
+    this.menuList(this.$route.params.idResto)
+  },
+  methods: {
+    ...mapActions(['menuList']),
+    formatPrice(value) {
+      if (value) {
+        const val = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+        return val
+      }
     }
   }
 }

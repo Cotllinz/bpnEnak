@@ -8,8 +8,13 @@
           class="revies_section pr-md-0 order-2 order-lg-1 mt-3 mt-lg-0"
         >
           <section class="desc_restaurant d-none d-lg-block mt-3 pt-1">
-            <h5><span>Open</span> (Mon - Sat, 09:00 - 21:00)</h5>
-            <p>Gn. Bahagia</p>
+            <h5>
+              <span>Open</span> ({{ UpperResto(resto.resto_open_day) }} -
+              {{ UpperResto(resto.resto_close_day) }}),
+              {{ formatDate(resto.resto_open_hour) }} -
+              {{ formatDate(resto.resto_close_hour) }}
+            </h5>
+            <p>{{ resto.resto_kelurahan }}</p>
           </section>
           <section>
             <b-card class="text-center card_reviews mt-2">
@@ -44,13 +49,14 @@
                 <h5>Directions</h5>
                 <maps class="images_example" />
                 <p class="text-center mt-2">
-                  Jl. Marsma R. Iswahyudi No.70, Gn. Bahagia, Kecamatan
-                  Balikpapan Selatan, Kota Balikpapan, Kalimantan Timur 76114
+                  {{ resto.resto_address }}
                 </p>
                 <h5 class="mb-0">
                   Call
                 </h5>
-                <a :href="`tel:${phone}`">082350775253</a>
+                <a :href="`tel:${resto.resto_phone}`">{{
+                  resto.resto_phone
+                }}</a>
               </section>
             </b-card>
           </section>
@@ -61,16 +67,35 @@
   </section>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import maps from './maps'
 export default {
   name: 'reviewsMaps',
   data() {
-    return {
-      phone: '082350775253'
-    }
+    return {}
   },
   components: {
     maps
+  },
+  computed: {
+    ...mapGetters({ resto: 'getResto', restoLoading: 'getLoadingResto' })
+  },
+  created() {
+    this.restoData(this.$route.params.idResto)
+  },
+  methods: {
+    ...mapActions(['restoData']),
+
+    UpperResto(value) {
+      if (value) {
+        return value.charAt(0).toUpperCase() + value.slice(1, 3)
+      }
+    },
+    formatDate(value) {
+      if (value) {
+        return value.slice(0, 5)
+      }
+    }
   }
 }
 </script>

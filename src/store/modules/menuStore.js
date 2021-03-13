@@ -3,7 +3,8 @@ export default {
   state: {
     menuData: [],
     menuList: [],
-    loadingMenu: false
+    loadingMenu: false,
+    loadingMenuList: false
   },
   mutations: {
     setMenu(state, payload) {
@@ -34,6 +35,7 @@ export default {
         axios
           .get(`${process.env.VUE_APP_URL}menu/resto/${payload}`)
           .then(res => {
+            context.state.loadingMenuList = true
             context.commit('setMenuList', res.data)
             resolve(res)
           })
@@ -52,6 +54,9 @@ export default {
     },
     getMenuList(state) {
       return state.menuList
+    },
+    getLoadingMenuList(state) {
+      return state.loadingMenuList
     }
   }
 }
