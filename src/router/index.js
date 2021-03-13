@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import bppSearch from '../views/bppSearch.vue'
 import restoDetails from '../views/restoDetails.vue'
 import fooDetails from '../views/foodDetails.vue'
+import login from '../views/auth/login.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,6 +27,11 @@ const routes = [
     path: '/fooDetails',
     name: 'fooDetails',
     component: fooDetails
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: login
   }
 ]
 
