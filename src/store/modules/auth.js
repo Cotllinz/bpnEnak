@@ -50,6 +50,18 @@ export default {
             reject(error.response)
           })
       })
+    },
+    resetPassword(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`${process.env.VUE_APP_URL}user/reset`, payload)
+          .then(result => {
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
     }
   },
   getters: {

@@ -20,24 +20,30 @@
         <h4 class="text-black mt-3">
           Create new account
         </h4>
-        <label class="text-grey mt-4">
-          Email
-        </label>
-        <br />
-        <input type="text" class="text-black text-14" autofocus />
         <br />
         <label class="text-grey mt-4">
-          Password
+          New Password
         </label>
         <br />
-        <input type="password" class="text-black text-14" />
+        <input
+          v-model="form.user_password"
+          type="password"
+          class="text-black text-14"
+        />
         <br />
         <label class="text-grey mt-4">
           Confirm password
         </label>
         <br />
-        <input type="password" class="text-black text-14" />
-        <button class="btn-login mt-5">
+        <input
+          v-model="confirm_password"
+          type="password"
+          class="text-black text-14"
+        />
+        <div v-if="error" class="error mt-3">
+          <p>*{{ error }}</p>
+        </div>
+        <button @click="resetPass" class="btn-login mt-5">
           Sign up
         </button>
         <p class="text-black text-14 text-center mt-4">
@@ -53,6 +59,48 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+
+export default {
+  data() {
+    return {
+      form: {
+        user_password: '',
+        user_key: this.$route.params.key
+      },
+      error: '',
+      confirm_password: ''
+    }
+  },
+  methods: {
+    ...mapActions(['resetPassword']),
+    resetPass() {
+      if (!this.form.user_password || !this.confirm_password) {
+        return (this.error =
+          'Please fill your new password & confirm password correctly first')
+      }
+
+      if (this.form.user_password !== this.confirm_password) {
+        return (this.error = "new password and confirm password doesn't match")
+      }
+
+      this.resetPassword(this.form)
+        .then(result => {
+          console.log(result)
+          this.error = ''
+          alert(result.data.msg)
+        })
+        .catch(err => {
+          console.log(err)
+          this.error = ''
+          alert(err.data.msg)
+        })
+    }
+  }
+}
+</script>
 
 <style scoped>
 * {
@@ -121,6 +169,18 @@ input:focus {
 
 a {
   text-decoration: none !important;
+}
+
+.error {
+  width: 100%;
+  background-color: #ca3a3a;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+.error p {
+  font-size: 12px;
+  color: #fff;
 }
 
 @media (max-width: 1200px) {
