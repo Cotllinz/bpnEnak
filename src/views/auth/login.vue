@@ -40,5 +40,6 @@ export default {
 .auth-img {
   width: 100%;
   height: 100vh;
+  min-height: 620px;
 }
 </style>

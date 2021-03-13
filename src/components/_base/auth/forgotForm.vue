@@ -28,7 +28,7 @@
           Email
         </label>
         <br />
-        <input type="password" class="text-black text-14" />
+        <input type="email" class="text-black text-14" />
         <button class="btn-login mt-5">
           Send
         </button>
@@ -108,5 +108,29 @@ input:focus {
 
 a {
   text-decoration: none !important;
+}
+
+@media (max-width: 1200px) {
+  .form {
+    padding: 0px 100px;
+  }
+}
+
+@media (max-width: 992px) {
+  .form {
+    padding: 0px 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .form {
+    padding: 0px 80px;
+  }
+}
+
+@media (max-width: 576px) {
+  .form {
+    padding: 0px 60px;
+  }
 }
 </style>

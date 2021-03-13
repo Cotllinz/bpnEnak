@@ -116,4 +116,28 @@ input:focus {
 a {
   text-decoration: none !important;
 }
+
+@media (max-width: 1200px) {
+  .form {
+    padding: 0px 100px;
+  }
+}
+
+@media (max-width: 992px) {
+  .form {
+    padding: 0px 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .form {
+    padding: 0px 80px;
+  }
+}
+
+@media (max-width: 576px) {
+  .form {
+    padding: 0px 60px;
+  }
+}
 </style>

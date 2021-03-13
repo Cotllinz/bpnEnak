@@ -37,8 +37,10 @@ export default {
 .col-0 {
   padding: unset;
 }
+
 .auth-img {
   width: 100%;
   height: 100vh;
+  min-height: 670px;
 }
 </style>
