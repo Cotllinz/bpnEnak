@@ -3,23 +3,43 @@
     <b-container fluid>
       <b-row>
         <b-col col lg="6" md="6" sm="12" cols="12">
+          <loginForm />
+        </b-col>
+        <b-col col lg="6" md="6" sm="0" cols="0">
           <img
-            class="auth-img"
+            class="auth-img animate__animated animate__fadeInRight"
             src="../../assets/Images/stock/eiliv-sonas-aceron-ZuIDLSz3XLg-unsplash (1).jpg"
           />
         </b-col>
-
-        <b-col col lg="6" md="6" sm="0" cols="0"> </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
 
+<script>
+import loginForm from '../../components/_base/auth/loginForm'
+export default {
+  components: {
+    loginForm
+  }
+}
+</script>
+
 <style scoped>
+* {
+  overflow-x: hidden;
+}
+
+.animate__animated.animate__fadeInRight {
+  --animate-duration: 1s;
+}
+
 .col,
 .col-lg-6,
-.col-sm-12 {
-  margin: unset;
+.col-md-6,
+.col-sm-0,
+.col-0 {
+  padding: unset;
 }
 .auth-img {
   width: 100%;
