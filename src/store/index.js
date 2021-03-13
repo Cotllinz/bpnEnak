@@ -6,6 +6,7 @@ import searchStore from './modules/searchStore'
 import menuStore from './modules/menuStore'
 import restoStore from './modules/restoStore'
 import reputatationsStore from './modules/reputationsStore'
+import auth from './modules/auth'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -17,11 +18,12 @@ export default new Vuex.Store({
     searchStore,
     menuStore,
     restoStore,
-    reputatationsStore
+    reputatationsStore,
+    auth
   },
   plugins: [
     createPersistedState({
-      paths: ['searchStore.searchParams']
+      paths: ['searchStore.searchParams', 'auth.user']
     })
   ]
 })

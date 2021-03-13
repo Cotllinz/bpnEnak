@@ -24,14 +24,27 @@
           Email
         </label>
         <br />
-        <input type="text" class="text-black text-14" autofocus />
+        <input
+          v-model="form.user_email"
+          type="text"
+          class="text-black text-14"
+          autofocus
+        />
         <br />
         <label class="text-grey mt-4">
           Password
         </label>
         <br />
-        <input type="password" class="text-black text-14" />
-        <button class="btn-login mt-5">
+        <input
+          v-on:keyup.enter="loginUser"
+          v-model="form.user_password"
+          type="password"
+          class="text-black text-14"
+        />
+        <div v-if="error" class="error mt-3">
+          <p>*{{ error }}</p>
+        </div>
+        <button @click="loginUser" class="btn-login mt-5">
           Login
         </button>
         <p class="text-black text-14 text-center mt-4">
@@ -47,6 +60,42 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+
+export default {
+  data() {
+    return {
+      form: {
+        user_email: '',
+        user_password: ''
+      },
+      error: ''
+    }
+  },
+  methods: {
+    ...mapActions(['login']),
+    loginUser() {
+      if (!this.form.user_email || !this.form.user_password) {
+        return (this.error =
+          'Please fill your email & password correctly first')
+      }
+      this.login(this.form)
+        .then(result => {
+          console.log(result)
+          this.error = ''
+          alert('berhasil')
+        })
+        .catch(err => {
+          console.log(err)
+          this.error = ''
+          alert(err.data.msg)
+        })
+    }
+  }
+}
+</script>
 
 <style scoped>
 * {
@@ -115,6 +164,18 @@ input:focus {
 
 a {
   text-decoration: none !important;
+}
+
+.error {
+  width: 100%;
+  background-color: #ca3a3a;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+.error p {
+  font-size: 12px;
+  color: #fff;
 }
 
 @media (max-width: 1200px) {
