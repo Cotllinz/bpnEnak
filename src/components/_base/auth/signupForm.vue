@@ -47,6 +47,7 @@
         <br />
         <input
           v-model="user_confirm_password"
+          v-on:keyup.enter="registerUser"
           type="password"
           class="text-black text-14"
         />
