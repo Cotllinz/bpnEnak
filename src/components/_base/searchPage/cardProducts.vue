@@ -9,7 +9,7 @@
       >
         <b-card
           :img-src="`${imageUrl}menu/${items.image.image_name}`"
-          @click="gotoFoodwithImage($event)"
+          @click="gotoFoodwithImage($event, items)"
           class="py-4 px-3 card_images align-items-center mb-4"
           img-alt="cardProduct"
           img-left
@@ -47,7 +47,7 @@
 
             <button
               type="button"
-              @click="goToDetails"
+              @click="goToDetails(items)"
               class="btn_visitRestaurant w-100 py-2"
             >
               Visit Restaurants
@@ -62,7 +62,7 @@
       >
         <b-card
           :img-src="`${imageUrl}menu/${items.image.image_name}`"
-          @click="gotoFoodwithImage($event)"
+          @click="gotoFoodwithImage($event, items)"
           class="py-4 px-3 d-block card_images align-items-center mb-4"
           img-alt="cardProduct"
           img-left
@@ -160,8 +160,17 @@ export default {
   methods: {
     ...mapActions(['sortingFoods']),
     ...mapMutations(['setErrorFood', 'setLimit']),
-    goToDetails() {
-      this.$router.push('/restoDetails')
+    goToDetails(items) {
+      const restoName = items.resto.resto_name.replace(/\s/g, '')
+      this.$router.push({
+        name: 'restoDetails',
+        params: {
+          idResto: items.resto.resto_id
+        },
+        query: {
+          restoName: restoName
+        }
+      })
     },
     gotoFood(items) {
       const foodName = items.menu_name.replace(/\s/g, '')
@@ -179,9 +188,19 @@ export default {
     setMore() {
       this.setLimit()
     },
-    gotoFoodwithImage(e) {
+    gotoFoodwithImage(e, items) {
       if (e.toElement.alt === 'cardProduct') {
-        this.$router.push('/fooDetails')
+        const foodName = items.menu_name.replace(/\s/g, '')
+        this.$router.push({
+          name: 'fooDetails',
+          params: {
+            idFood: items.menu_id
+          },
+          query: {
+            restoId: items.resto.resto_id,
+            foodName: foodName
+          }
+        })
       }
     }
   }

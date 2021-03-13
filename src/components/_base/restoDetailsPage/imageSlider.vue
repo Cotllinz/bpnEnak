@@ -1,12 +1,12 @@
 <template>
   <section>
-    <b-container>
+    <b-container v-if="loadingResto">
       <b-row>
         <b-col cols="12">
           <section
             class="d-flex align-items-center align-items-lg-start title_details"
           >
-            <h2>Nasi Kuning Mie basah</h2>
+            <h2>{{ resto.resto_name }}</h2>
             <div class="d-flex flex-column pt-1 ml-auto">
               <b-form-rating
                 id="rating-details"
@@ -17,10 +17,10 @@
                 class="mb-lg-2"
                 inline
                 color="#FCC400"
-                value="3.6"
+                :value="resto.rating"
               ></b-form-rating>
               <label class="label_revies text-right" for="label_revies"
-                >(110 Reviews)</label
+                >({{ resto.review_by }} Reviews)</label
               >
             </div>
           </section>
@@ -31,14 +31,19 @@
               class="images__view"
               ref="main"
               :options="options1"
+              :navButtons="resto.resto_image.length > 1 ? true : false"
               :as-nav-for="viewImage"
             >
               <div
                 class="slide d-flex align-items-center"
-                v-for="(slide, index) in slides"
+                v-for="(slide, index) in resto.resto_image"
                 :key="index"
               >
-                <img class="images_main" :src="slide" alt="images_main" />
+                <img
+                  class="images_main"
+                  :src="`${imageUrl}resto/${slide.image_name}`"
+                  alt="images_main"
+                />
               </div>
               <template slot="prevButton"
                 ><img
@@ -56,21 +61,22 @@
             <agile
               class="thumbnails mt-3"
               ref="thumbnails"
+              :infinite="resto.resto_image.length > 1 ? true : false"
               :options="options2"
               :as-nav-for="thumbnailImaes"
             >
               <div
                 class="slides_thumnail"
-                v-for="(items, index) in slides"
+                v-for="(items, index) in resto.resto_image"
                 :key="index"
                 @click="$refs.thumbnails.goTo(index)"
               >
                 <img
-                  :src="items"
+                  :src="`${imageUrl}resto/${items.image_name}`"
                   :class="
-                    slides.length === 2
+                    lenghtImage === 2
                       ? 'images_thumnail_two'
-                      : slides.length === 1
+                      : lenghtImage === 1
                       ? 'images_thumnail_one'
                       : 'images_thumnail'
                   "
@@ -86,24 +92,26 @@
 </template>
 <script>
 import { VueAgile } from 'vue-agile'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'SliderImage',
   components: { agile: VueAgile },
   data() {
     return {
+      imageUrl: process.env.VUE_APP_URL_IMAGE,
+      lenghtImage: 0,
+      show: false,
       viewImage: [],
       thumbnailImaes: [],
       options1: {
         dots: false,
-        fade: true,
-        navButtons: true
+        fade: true
       },
       options2: {
         centerMode: true,
         dots: false,
         navButtons: false,
         slidesToShow: 3,
-        infinite: false,
         responsive: [
           {
             breakpoint: 100,
@@ -120,32 +128,23 @@ export default {
             }
           }
         ]
-      },
-      slides: [
-        'https://images.unsplash.com/photo-1453831362806-3d5577f014a4?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1496412705862-e0088f16f791?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1472926373053-51b220987527?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1497534547324-0ebb3f052e88?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ'
-      ]
+      }
     }
   },
-  mounted() {
-    this.viewImage.push(this.$refs.thumbnails)
-    this.thumbnailImaes.push(this.$refs.main)
+  computed: {
+    ...mapGetters({ resto: 'getResto', loadingResto: 'getLoadingResto' })
   },
   created() {
-    if (this.slides.length > 2) {
-      this.options2.infinite = true
-      this.options2.slidesToShow = 3
-    } else if (this.slides.length > 1) {
-      this.options2.infinite = true
-      this.options2.responsive[1].settings.slidesToShow = 2
-    }
+    this.restoData(this.$route.params.idResto).then(() => {
+      this.lenghtImage = this.resto.resto_image.length
+      this.viewImage.push(this.$refs.thumbnails)
+      this.thumbnailImaes.push(this.$refs.main)
+    })
   },
-  methods: {}
+
+  methods: {
+    ...mapActions(['restoData'])
+  }
 }
 </script>
 <style scoped>

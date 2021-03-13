@@ -19,7 +19,7 @@
             <h2>{{ resto.resto_name }}</h2>
             <h4>
               <span>Open</span> ({{ UpperResto(resto.resto_open_day) }} -
-              {{ UpperResto(resto.resto_close_day) }},
+              {{ UpperResto(resto.resto_close_day) }}),
               {{ formatDate(resto.resto_open_hour) }} -
               {{ formatDate(resto.resto_close_hour) }}
             </h4>

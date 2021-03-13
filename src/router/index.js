@@ -18,7 +18,7 @@ const routes = [
     component: bppSearch
   },
   {
-    path: '/restoDetails',
+    path: '/restoDetails/:idResto',
     name: 'restoDetails',
     component: restoDetails
   },

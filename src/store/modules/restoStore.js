@@ -7,6 +7,7 @@ export default {
   mutations: {
     setResto(state, payload) {
       state.restoData = payload.data
+      console.log(state.restoData)
     }
   },
   actions: {

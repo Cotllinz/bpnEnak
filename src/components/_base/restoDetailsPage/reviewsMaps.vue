@@ -7,13 +7,12 @@
           lg="8"
           class="revies_section pr-md-0 order-2 order-lg-1 mt-3 mt-lg-0"
         >
-          <section class="desc_restaurant d-none d-lg-block">
-            <h5>Seafood</h5>
+          <section class="desc_restaurant d-none d-lg-block mt-3 pt-1">
             <h5><span>Open</span> (Mon - Sat, 09:00 - 21:00)</h5>
             <p>Gn. Bahagia</p>
           </section>
           <section>
-            <b-card class="text-center card_reviews">
+            <b-card class="text-center card_reviews mt-2">
               <b-form-rating
                 class="rating_review mb-3"
                 id="rating-inline"
@@ -35,8 +34,7 @@
           </section>
         </b-col>
         <b-col md="5" lg="4" class="maps_section pl-md-1 order-1 order-lg-2">
-          <section class="desc_restaurant d-block d-lg-none">
-            <h5>Seafood</h5>
+          <section class="desc_restaurant d-block d-lg-none mt-2">
             <h5><span>Open</span> (Mon - Sat, 09:00 - 21:00)</h5>
             <p>Gn. Bahagia</p>
           </section>
@@ -94,6 +92,7 @@ export default {
   width: 100%;
   height: 180px;
 }
+
 .desc_restaurant h5,
 .desc_restaurant p {
   font-family: 'Poppins', sans-serif;
@@ -117,11 +116,9 @@ export default {
   color: #e79418;
   transition: 0.4s;
 }
-.desc_restaurant h5:nth-child(1) {
-  font-weight: 700;
-  font-size: 25px;
-}
-.desc_restaurant h5:nth-child(2) {
+
+.desc_restaurant h5 {
+  font-size: 18px;
   color: #898989;
 }
 .desc_restaurant h5 span {
