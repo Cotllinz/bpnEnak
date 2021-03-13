@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="getLoading">
     <b-container>
       <section class="title_reviews pl-lg-2">
         <h5>Reviews</h5>
@@ -10,7 +10,7 @@
         class="px-lg-2"
         :class="scroll ? 'scroll' : ''"
       >
-        <b-col v-for="(items, index) in data" :key="index">
+        <b-col v-for="(items, index) in reputations" :key="index">
           <div>
             <b-card class="card_reviews mb-3">
               <section class="d-flex reviews_names align-items-center">
@@ -20,8 +20,8 @@
                   alt="images_reviews"
                 />
                 <section class="pl-2">
-                  <h4>Rudy Galih Putra</h4>
-                  <p>114 written reviews</p>
+                  <h4>{{ items.user_email }}</h4>
+                  <p>{{ items.user_rate_count }} written reviews</p>
                 </section>
               </section>
               <section class="rating_desc">
@@ -30,19 +30,17 @@
                   id="rating-inline"
                   inline
                   style="color: #fcc400;"
-                  value="4"
+                  :value="items.reputation_rating"
                   readonly
                 ></b-form-rating>
                 <p class="pl-2 mb-0">
-                  This place is pure paradise of seafood, the food is amazing.
-                  the service is ok, i just had a bit misunderstanding with the
-                  waitress here but overall the food is 5 Star!
+                  {{ items.reputation_comment }}
                 </p>
               </section>
             </b-card>
           </div>
         </b-col>
-        <b-col :class="scroll ? 'd-none' : ''">
+        <b-col v-if="reputations.length > 5" :class="scroll ? 'd-none' : ''">
           <div>
             <b-card
               @click="showMore"
@@ -58,15 +56,25 @@
   </section>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Reviews',
   data() {
     return {
-      data: 5,
       scroll: false
     }
   },
+  computed: {
+    ...mapGetters({
+      reputations: 'getReputations',
+      getLoading: 'getLoadingReputations'
+    })
+  },
+  created() {
+    this.reputation(this.$route.params.idResto)
+  },
   methods: {
+    ...mapActions(['reputation']),
     showMore() {
       this.data = 10
       this.scroll = true

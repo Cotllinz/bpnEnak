@@ -1,13 +1,17 @@
 <template>
   <section>
-    <b-container>
+    <b-container v-if="getLoading">
       <agile class="food__slider" :options="options1">
         <div
           class="slide__foodDetails d-flex align-items-center"
-          v-for="(items, index) in slides"
+          v-for="(items, index) in menu.image"
           :key="index"
         >
-          <img class="images_content" :src="items" alt="images_foodDetails" />
+          <img
+            class="images_content"
+            :src="`${imageUrl}menu/${items.image_name}`"
+            alt="images_foodDetails"
+          />
         </div>
         <template slot="prevButton"
           ><img
@@ -27,26 +31,28 @@
 </template>
 <script>
 import { VueAgile } from 'vue-agile'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'foodDetailsCaraousel',
   components: { agile: VueAgile },
   data() {
     return {
+      imageUrl: process.env.VUE_APP_URL_IMAGE,
       options1: {
         fade: true,
         autoplay: true,
         infinite: true
-      },
-      slides: [
-        'https://images.unsplash.com/photo-1453831362806-3d5577f014a4?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1496412705862-e0088f16f791?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1472926373053-51b220987527?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ',
-        'https://images.unsplash.com/photo-1497534547324-0ebb3f052e88?ixlib=rb-1.2.1&q=85&fm=jpg&crop=entropy&cs=srgb&w=1600&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ'
-      ]
+      }
     }
+  },
+  computed: {
+    ...mapGetters({ getLoading: 'getLoadingMenu', menu: 'getMenu' })
+  },
+  created() {
+    this.menuData(this.$route.params.idFood)
+  },
+  methods: {
+    ...mapActions(['menuData'])
   }
 }
 </script>

@@ -13,24 +13,24 @@
     </b-container>
     <b-container fluid>
       <section class="slick">
-        <VueSlickCarousel class="px-lg-4" v-bind="settings">
+        <VueSlickCarousel v-if="turnOnSlider" class="px-lg-4" v-bind="settings">
           <section
-            v-for="(items, index) in data"
+            v-for="(items, index) in newMenu"
             :key="index"
             class="list_foods pr-3"
           >
             <b-card
               class="images_corousel"
-              :img-src="
-                require('../../../assets/Images/SecondaryThema/ExempleCorousel.jpg')
-              "
+              :img-src="`${imageUrl}menu/${items.menu_image.image_name}`"
               img-alt="Card image"
               img-top
             >
               <b-card-text>
                 <section class="desc_title">
-                  <h4>Nasi Kuning Mbak Mamiek Cantik</h4>
-                  <h5>Klandasan, Balikpapan Kota</h5>
+                  <h4>{{ items.menu_name }}</h4>
+                  <h5>
+                    {{ items.resto_kelurahan }}, {{ items.resto_kecamatan }}
+                  </h5>
                 </section>
               </b-card-text>
             </b-card>
@@ -44,19 +44,19 @@
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'CorouselFoods',
   components: { VueSlickCarousel },
   data() {
     return {
-      data: 6,
+      imageUrl: process.env.VUE_APP_URL_IMAGE,
       settings: {
         infinite: true,
         slidesToShow: 6,
-        arrows: false,
         slidesToScroll: 1,
         autoplay: true,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 2000,
         pauseOnDotsHover: true,
         pauseOnFocus: true,
         pauseOnHover: true,
@@ -106,6 +106,15 @@ export default {
         ]
       }
     }
+  },
+  computed: {
+    ...mapGetters({ newMenu: 'getNewMenu', turnOnSlider: 'turnOnSlider' })
+  },
+  created() {
+    this.newMenus()
+  },
+  methods: {
+    ...mapActions(['newMenus'])
   }
 }
 </script>

@@ -15,6 +15,9 @@
           </template>
           <b-form-input
             type="text"
+            autocomplete="off"
+            v-model="searchFoods"
+            @keyup.enter="searchFood"
             placeholder="Specify your taste"
             maxlength="30"
           ></b-form-input>
@@ -30,39 +33,20 @@
             </p>
           </section>
         </b-col>
-        <b-col>
-          <section class="cardBest__food">
-            <b-card-group deck>
-              <b-card
-                class="images_food"
-                :img-src="
-                  require('../../../assets/Images/SecondaryThema/ExampleImages.jpg')
-                "
-                img-alt="images_bestFood"
-                img-top
-              >
-                <b-card-text class="desc_bestFood">
-                  <h3>Mantau Pondok</h3>
-                  <h5>Gn. Sari Ilir, Balikpapan Tengah</h5>
-                </b-card-text>
-              </b-card>
-            </b-card-group>
-          </section>
-        </b-col>
-        <b-col v-for="(items, index) in data" :key="index">
+        <b-col v-for="(items, index) in restoTop" :key="index">
           <section class="cardBest__food">
             <b-card-group deck>
               <b-card
                 class="images_food mb-3 mb-lg-4"
-                :img-src="
-                  require('../../../assets/Images/SecondaryThema/ExampleImages2.jpg')
-                "
+                :img-src="`${imageUrl}resto/${items.resto_image}`"
                 img-alt="images_bestFood"
                 img-top
               >
                 <b-card-text class="desc_bestFood">
-                  <h3>Kepiting Dandito</h3>
-                  <h5>Gn. Bahagia, Balikpapan Selatan</h5>
+                  <h3>{{ items.resto_name }}</h3>
+                  <h5>
+                    {{ items.resto_kelurahan }}, {{ items.resto_kecamatan }}
+                  </h5>
                 </b-card-text>
               </b-card>
             </b-card-group>
@@ -73,11 +57,28 @@
   </main>
 </template>
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'mainComponent',
   data() {
     return {
-      data: 5
+      imageUrl: process.env.VUE_APP_URL_IMAGE,
+      searchFoods: ''
+    }
+  },
+  computed: {
+    ...mapGetters({ restoTop: 'getBestResto', getParams: 'getParams' })
+  },
+  created() {
+    this.BestResto()
+  },
+  methods: {
+    ...mapActions(['BestResto']),
+    ...mapMutations(['restartLimit', 'resetOnSearch']),
+    searchFood() {
+      this.restartLimit()
+      this.resetOnSearch(this.searchFoods)
+      this.$router.push('/Bppsearch')
     }
   }
 }

@@ -1,26 +1,23 @@
 <template>
   <section>
-    <b-container>
+    <b-container v-if="loadingMenu">
       <section class="title_menus mt-2 mb-3">
         <h4>Other Product From Restaurant</h4>
       </section>
       <b-row cols-md="2" cols-lg="2" cols-xl="3">
-        <b-col v-for="(items, index) in data" :key="index" class="pr-lg-0">
+        <b-col v-for="(items, index) in menu" :key="index" class="pr-lg-0">
           <b-card
-            :img-src="
-              'https://images.unsplash.com/photo-1594030990808-ebd1c2247c28?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=696&q=80'
-            "
+            :img-src="`${imageUrl}menu/${items.menu_image[0].image_name}`"
             class="py-lg-2 py-3 px-3 card_images align-items-center mb-4"
             img-alt="cardProduct"
             img-left
           >
             <section class="desc_Food">
-              <h2>Kepiting Saus Khas Dandito</h2>
+              <h2>{{ items.menu_name }}</h2>
               <p>
-                Kepiting rebus segar dengan saus asam manis yang menggugah
-                selera siapapun yang memakannya
+                {{ items.menu_desc.slice(0, 110) + ',...' }}
               </p>
-              <h5>Rp. 74.000</h5>
+              <h5>Rp. {{ formatPrice(items.menu_price) }}</h5>
             </section>
           </b-card>
         </b-col>
@@ -29,11 +26,27 @@
   </section>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'otherMenus',
   data() {
     return {
-      data: 3
+      imageUrl: process.env.VUE_APP_URL_IMAGE
+    }
+  },
+  computed: {
+    ...mapGetters({ menu: 'getMenuList', loadingMenu: 'getLoadingMenu' })
+  },
+  created() {
+    this.menuList(this.$route.query.restoId)
+  },
+  methods: {
+    ...mapActions(['menuList']),
+    formatPrice(value) {
+      if (value) {
+        const val = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+        return val
+      }
     }
   }
 }
@@ -49,6 +62,7 @@ export default {
 .card {
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  height: 200px;
 }
 .card-body {
   padding: 0 0 0 5px;

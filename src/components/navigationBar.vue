@@ -30,6 +30,9 @@
             </template>
             <b-form-input
               type="text"
+              v-model.lazy="getParams.searchName"
+              @keyup.enter="searchFood($event)"
+              @keyup="searchFood($event)"
               placeholder="Specify your taste"
               maxlength="30"
             ></b-form-input>
@@ -40,9 +43,7 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="navbar_items ml-auto align-items-center flex-row">
-          <b-nav-item @click="designerAnjg" class="mr-lg-3 mr-3"
-            >Login</b-nav-item
-          >
+          <b-nav-item class="mr-lg-3 mr-3">Login</b-nav-item>
           <b-nav-item v-if="onScroll">Signup</b-nav-item>
           <b-nav-item v-else
             ><button class="btn_singUp d-none d-md-block py-2 px-3">
@@ -57,22 +58,41 @@
   </div>
 </template>
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   props: ['onScroll'],
   name: 'navigationBar',
   data() {
     return {
-      scrollPosition: null
+      scrollPosition: null,
+      search: ''
     }
   },
+  computed: {
+    ...mapGetters({ getParams: 'getParams' })
+  },
   methods: {
+    ...mapMutations(['restartLimit', 'setErrorFood']),
+    ...mapActions(['sortingFoods']),
     updateScroll() {
       this.scrollPosition = window.scrollY
     },
-    designerAnjg() {
-      alert(
-        'Designernya ke Anjg kalo ngasih Design Gak tau diri anjg bangst \n \n aku sayang yoko'
-      )
+    searchFood(e) {
+      this.restartLimit()
+      this.sortingFoods()
+        .then(res => {
+          if (res) {
+            this.setErrorFood(false)
+          }
+        })
+        .catch(err => {
+          if (err) {
+            this.setErrorFood(true)
+          }
+        })
+      if (e.key === 'Enter') {
+        this.$router.push('/Bppsearch').catch(() => {})
+      }
     },
     onHome() {
       this.$router.push('/')
