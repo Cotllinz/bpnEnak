@@ -85,7 +85,7 @@ export default {
         .then(result => {
           console.log(result)
           this.error = ''
-          alert('berhasil')
+          alert(result.data.msg)
         })
         .catch(err => {
           console.log(err)
