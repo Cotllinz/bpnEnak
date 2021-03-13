@@ -3,12 +3,12 @@
     <b-container fluid>
       <b-row>
         <b-col col lg="6" md="6" sm="12" cols="12">
-          <loginForm />
+          <resetForm />
         </b-col>
         <b-col col lg="6" md="6" sm="0" cols="0">
           <img
             class="auth-img animate__animated animate__fadeInRight"
-            src="../../assets/Images/stock/eiliv-sonas-aceron-ZuIDLSz3XLg-unsplash (1).jpg"
+            src="../../assets/Images/stock/brooke-lark-1Rm9GLHV0UA-unsplash.jpg"
           />
         </b-col>
       </b-row>
@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import loginForm from '../../components/_base/auth/loginForm'
+import resetForm from '../../components/_base/auth/resetForm'
 export default {
   components: {
-    loginForm
+    resetForm
   }
 }
 </script>

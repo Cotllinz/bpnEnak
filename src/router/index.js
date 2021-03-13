@@ -5,6 +5,9 @@ import bppSearch from '../views/bppSearch.vue'
 
 import fooDetails from '../views/foodDetails.vue'
 import login from '../views/auth/login.vue'
+import signup from '../views/auth/signup.vue'
+import reset from '../views/auth/reset.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -32,6 +35,16 @@ const routes = [
     path: '/login',
     name: 'login',
     component: login
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: signup
+  },
+  {
+    path: '/reset/:key',
+    name: 'reset',
+    component: reset
   }
 ]
 
