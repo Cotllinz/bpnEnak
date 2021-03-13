@@ -36,11 +36,6 @@
           Do you have an account ?
           <router-link to="/login">login here</router-link>
         </p>
-        <router-link to="/forgot">
-          <p class="text-grey text-14 text-center mt-2">
-            Forgot password ?
-          </p>
-        </router-link>
       </div>
     </div>
   </div>
