@@ -186,7 +186,7 @@ export default {
 
   @media (max-width: 450px) {
     .slick {
-      min-width: 150vw;
+      min-width: 160vw;
     }
   }
   @media (max-width: 393px) {
