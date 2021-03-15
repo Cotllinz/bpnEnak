@@ -8,7 +8,6 @@
             New in the city with more variant and new taste is here.
           </p>
         </div>
-        <button class="btn__showmore ml-auto px-lg-3 mb-4">Show More</button>
       </section>
     </b-container>
     <b-container fluid>
@@ -20,6 +19,7 @@
             class="list_foods pr-3"
           >
             <b-card
+              @click="goFood(items)"
               class="images_corousel"
               :img-src="`${imageUrl}menu/${items.menu_image.image_name}`"
               img-alt="Card image"
@@ -114,7 +114,20 @@ export default {
     this.newMenus()
   },
   methods: {
-    ...mapActions(['newMenus'])
+    ...mapActions(['newMenus']),
+    goFood(items) {
+      const foodName = items.menu_name.replace(/\s/g, '')
+      this.$router.push({
+        name: 'fooDetails',
+        params: {
+          idFood: items.menu_id
+        },
+        query: {
+          restoId: items.resto_id,
+          foodName: foodName
+        }
+      })
+    }
   }
 }
 </script>
@@ -140,19 +153,7 @@ export default {
   margin-bottom: 17px;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
-.btn__showmore {
-  font-family: 'Poppins', sans-serif;
-  border-radius: 13px;
-  font-weight: 700;
-  border: none;
-  height: 40px;
-  color: #ffffff;
-  background: #ff4545;
-}
-.btn__showmore:hover {
-  background: #fd2a2a;
-  transition: 0.3s;
-}
+
 .desc_title h4 {
   font-family: 'Poppins', sans-serif;
   font-size: 1.1em;
@@ -182,11 +183,7 @@ export default {
   .title__newTaste p {
     font-size: 14px;
   }
-  .btn__showmore {
-    font-size: 15px;
-    width: 150px !important;
-    height: 40px;
-  }
+
   @media (max-width: 450px) {
     .slick {
       min-width: 150vw;
@@ -199,10 +196,7 @@ export default {
       margin-bottom: 17px;
       box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
     }
-    .btn__showmore {
-      font-size: 14px;
-      height: 40px;
-    }
+
     .slick {
       min-width: 135vw;
     }

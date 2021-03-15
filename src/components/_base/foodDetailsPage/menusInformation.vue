@@ -41,7 +41,13 @@
             </b-form-rating>
             <p>{{ resto.review_by }} reviews</p>
           </div>
-          <button type="button" class="py-2 px-5 btn_visitResto">Visit</button>
+          <button
+            type="button"
+            @click="goToResto(resto)"
+            class="py-2 px-5 btn_visitResto"
+          >
+            Visit
+          </button>
         </b-col>
       </b-row>
       <hr />
@@ -85,6 +91,18 @@ export default {
       if (value) {
         return value.slice(0, 5)
       }
+    },
+    goToResto(items) {
+      const restoName = items.resto_name.replace(/\s/g, '')
+      this.$router.push({
+        name: 'restoDetails',
+        params: {
+          idResto: items.resto_id
+        },
+        query: {
+          restoName: restoName
+        }
+      })
     }
   }
 }

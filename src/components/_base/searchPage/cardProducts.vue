@@ -4,7 +4,7 @@
       <h1 class="notFound text-center" v-if="errorSearch">Gak nemu blay :(</h1>
       <b-col
         class="d-none d-lg-block"
-        v-for="(items, index) in foods"
+        v-for="(items, index) in foods.slice(0, this.getLimit)"
         :key="'Dekstop' + index"
       >
         <b-card
@@ -126,7 +126,8 @@ export default {
   name: 'FoodsCard',
   data() {
     return {
-      imageUrl: process.env.VUE_APP_URL_IMAGE
+      imageUrl: process.env.VUE_APP_URL_IMAGE,
+      limit: 6
     }
   },
   computed: {
@@ -134,7 +135,8 @@ export default {
       foods: 'getFoods',
       errorSearch: 'getErrorSearch',
       getTotalData: 'getTotalData',
-      getSumData: 'getSumData'
+      getSumData: 'getSumData',
+      getLimit: 'getLimit'
     }),
     showButton() {
       if (this.getSumData > 6 && this.getTotalData > 0) {
@@ -158,7 +160,7 @@ export default {
       })
   },
   methods: {
-    ...mapActions(['sortingFoods']),
+    ...mapActions(['sortingFoods', 'getForLimit']),
     ...mapMutations(['setErrorFood', 'setLimit']),
     goToDetails(items) {
       const restoName = items.resto.resto_name.replace(/\s/g, '')

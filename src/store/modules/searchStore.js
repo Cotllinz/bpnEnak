@@ -11,17 +11,18 @@ export default {
     errorSearch: false,
     sumData: 0,
     totalData: 0,
-    limit: 6
+    limit: 99999,
+    limitData: 6
   },
   mutations: {
     setFood(state, payload) {
       state.foods = payload.data
-      state.sumData = state.foods.length
-      state.totalData = state.foods.length - 6
+      state.sumData = payload.data.length
+      state.totalData = payload.data.length - 6
     },
 
     restartLimit(state) {
-      state.limit = 6
+      state.limitData = 6
     },
     resetOnSearch(state, payload) {
       state.searchParams = {
@@ -42,11 +43,11 @@ export default {
       state.searchParams.district = payload
     },
     setLimit(state) {
-      if (state.totalData > state.limit) {
-        state.limit += 6
+      if (state.totalData > state.limitData) {
+        state.limitData += 6
         state.totalData -= 6
       } else if (state.totalData <= 6) {
-        state.limit += state.totalData
+        state.limitData += state.totalData
         state.totalData -= state.totalData
       }
     },
@@ -64,15 +65,16 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `${process.env.VUE_APP_URL}menu?type=${context.state.searchParams.type}&price=${context.state.searchParams.price}&kecamatan=${context.state.searchParams.district}&search=${context.state.searchParams.searchName}`
+            `${process.env.VUE_APP_URL}menu?type=${context.state.searchParams.type}&price=${context.state.searchParams.price}&kecamatan=${context.state.searchParams.district}&search=${context.state.searchParams.searchName}&limit=${context.state.limit}`
           )
           .then(res => {
+            context.dispatch('getForLimit')
             context.commit('setFood', res.data)
             resolve(res)
-            /*             console.clear() */
+            console.clear()
           })
           .catch(err => {
-            /*   console.clear() */
+            console.clear()
             reject(err.response)
           })
       })
@@ -93,6 +95,9 @@ export default {
     },
     getSumData(state) {
       return state.sumData
+    },
+    getLimit(state) {
+      return state.limitData
     }
   }
 }

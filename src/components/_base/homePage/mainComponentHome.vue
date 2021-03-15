@@ -37,6 +37,7 @@
           <section class="cardBest__food">
             <b-card-group deck>
               <b-card
+                @click="goToResto(items)"
                 class="images_food mb-3 mb-lg-4"
                 :img-src="`${imageUrl}resto/${items.resto_image}`"
                 img-alt="images_bestFood"
@@ -79,6 +80,18 @@ export default {
       this.restartLimit()
       this.resetOnSearch(this.searchFoods)
       this.$router.push('/Bppsearch')
+    },
+    goToResto(items) {
+      const restoName = items.resto_name.replace(/\s/g, '')
+      this.$router.push({
+        name: 'restoDetails',
+        params: {
+          idResto: items.resto_id
+        },
+        query: {
+          restoName: restoName
+        }
+      })
     }
   }
 }
