@@ -56,7 +56,7 @@
         </b-card>
       </b-col>
       <b-col
-        v-for="(items, index) in foods"
+        v-for="(items, index) in foods.slice(0, this.getLimit)"
         :key="'Mobile' + index"
         class="d-block d-lg-none"
       >
@@ -68,7 +68,7 @@
           img-left
         >
           <section class="desc_Food mt-2">
-            <section style="cursor:pointer;" @click="gotoFood">
+            <section style="cursor:pointer;" @click="gotoFood(items)">
               <h2>{{ items.menu_name }}</h2>
               <h5>{{ items.resto_kelurahan }}</h5>
               <hr />
@@ -99,7 +99,7 @@
 
             <button
               type="button"
-              @click="goToDetails"
+              @click="goToDetails(items)"
               class="btn_visitRestaurant w-100 py-2"
             >
               Visit Restaurants
