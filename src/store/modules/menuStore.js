@@ -4,7 +4,10 @@ export default {
     menuData: [],
     menuList: [],
     loadingMenu: false,
-    loadingMenuList: false
+    loadingMenuList: false,
+    limitList: 6,
+    sumDataListMenu: 0,
+    totalDataListMenu: 0
   },
   mutations: {
     setMenu(state, payload) {
@@ -12,7 +15,20 @@ export default {
     },
     setMenuList(state, payload) {
       state.menuList = payload.data
-      console.log(state.menuList)
+      state.sumDataListMenu = payload.data.length
+      state.totalDataListMenu = payload.data.length - 6
+    },
+    setLimitListMenu(state) {
+      if (state.totalDataListMenu > state.limitList) {
+        state.limitList += 3
+        state.totalDataListMenu -= 3
+      } else if (state.totalDataListMenu <= 3) {
+        state.limitList += state.totalDataListMenu
+        state.totalDataListMenu -= state.totalDataListMenu
+      }
+    },
+    restartLimitListMenu(state) {
+      state.limitList = 6
     }
   },
   actions: {
@@ -57,6 +73,15 @@ export default {
     },
     getLoadingMenuList(state) {
       return state.loadingMenuList
+    },
+    getLimitListMenu(state) {
+      return state.limitList
+    },
+    getTotalDataListMenu(state) {
+      return state.totalDataListMenu
+    },
+    getSumDataListMenu(state) {
+      return state.sumDataListMenu
     }
   }
 }

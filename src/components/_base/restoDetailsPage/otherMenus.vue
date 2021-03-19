@@ -6,7 +6,11 @@
         <h4>Menu</h4>
       </section>
       <b-row class="pl-lg-2" cols-md="2" cols-lg="2" cols-xl="3">
-        <b-col v-for="(items, index) in menuData" :key="index" class="pr-lg-0">
+        <b-col
+          v-for="(items, index) in menuData.slice(0, this.limit)"
+          :key="index"
+          class="pr-lg-0"
+        >
           <b-card
             :img-src="`${imageUrl}menu/${items.menu_image[0].image_name}`"
             class="py-lg-2 py-3 px-3 card_images align-items-center mb-4"
@@ -23,12 +27,18 @@
           </b-card>
         </b-col>
       </b-row>
-      <button class="btn_loadMore py-2 px-5">Load More</button>
+      <button
+        v-if="showButton"
+        @click="showMore"
+        class="btn_loadMore py-2 px-5"
+      >
+        Load More
+      </button>
     </b-container>
   </section>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'otherMenus',
   data() {
@@ -39,19 +49,34 @@ export default {
   computed: {
     ...mapGetters({
       menuData: 'getMenuList',
-      LoadingMenu: 'getLoadingMenuList'
-    })
+      LoadingMenu: 'getLoadingMenuList',
+      limit: 'getLimitListMenu',
+      totalData: 'getTotalDataListMenu',
+      sumData: 'getSumDataListMenu'
+    }),
+    showButton() {
+      if (this.sumData > 1 && this.totalData > 0) {
+        return true
+      } else {
+        return false
+      }
+    }
   },
   created() {
     this.menuList(this.$route.params.idResto)
+    this.restartLimitListMenu()
   },
   methods: {
     ...mapActions(['menuList']),
+    ...mapMutations(['setLimitListMenu', 'restartLimitListMenu']),
     formatPrice(value) {
       if (value) {
         const val = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
         return val
       }
+    },
+    showMore() {
+      this.setLimitListMenu()
     }
   }
 }

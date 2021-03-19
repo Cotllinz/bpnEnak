@@ -27,6 +27,11 @@ export default {
     reviews,
     otherMenus
   },
+  data() {
+    return {
+      /*  reload: location.reload() */
+    }
+  },
   created() {
     window.scrollTo(0, 0)
   }
