@@ -10,7 +10,10 @@
         class="px-lg-2"
         :class="scroll ? 'scroll' : ''"
       >
-        <b-col v-for="(items, index) in reputations" :key="index">
+        <b-col
+          v-for="(items, index) in reputations.slice(0, this.limit)"
+          :key="index"
+        >
           <div>
             <b-card class="card_reviews mb-3">
               <section class="d-flex reviews_names align-items-center">
@@ -56,18 +59,20 @@
   </section>
 </template>
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Reviews',
   data() {
     return {
-      scroll: false
+      scroll: false,
+      limit: 5
     }
   },
   computed: {
     ...mapGetters({
       reputations: 'getReputations',
-      getLoading: 'getLoadingReputations'
+      getLoading: 'getLoadingReputations',
+      getLimit: 'getLimitReputations'
     })
   },
   created() {
@@ -75,8 +80,9 @@ export default {
   },
   methods: {
     ...mapActions(['reputation']),
+    ...mapMutations(['setLimiReputations']),
     showMore() {
-      this.data = 10
+      this.limit = 999999
       this.scroll = true
     }
   }

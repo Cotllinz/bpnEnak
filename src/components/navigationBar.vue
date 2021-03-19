@@ -1,6 +1,7 @@
 <template>
   <div>
     <b-navbar
+      v-if="getCase === 0"
       :class="onScroll ? { change_color: scrollPosition > 70 } : 'navbarColor'"
       toggleable="lg"
       fixed="top"
@@ -43,13 +44,34 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="navbar_items ml-auto align-items-center flex-row">
-          <b-nav-item class="mr-lg-3 mr-3">Login</b-nav-item>
+          <b-nav-item class="mr-lg-3 d-none d-md-block mr-3">Login</b-nav-item>
           <b-nav-item v-if="onScroll">Signup</b-nav-item>
           <b-nav-item v-else
             ><button class="btn_singUp d-none d-md-block py-2 px-3">
               Create Account
             </button>
-            <a class=" d-block d-md-none mobile_signup">Signup</a>
+            <div class="d-block d-md-none d-flex mobile_signup">
+              <section>
+                <b-icon
+                  @click="clickTrigger(2)"
+                  class="mr-3"
+                  icon="search"
+                  font-scale="1.5"
+                  aria-hidden="true"
+                  style="color:#ffffff;"
+                ></b-icon>
+              </section>
+              <section>
+                <b-icon
+                  @click="clickTrigger(1)"
+                  class="mr-3"
+                  icon="person-fill"
+                  font-scale="1.5"
+                  aria-hidden="true"
+                  style="color:#ffffff;"
+                ></b-icon>
+              </section>
+            </div>
           </b-nav-item>
         </b-navbar-nav>
         <!-- Right aligned nav items -->
@@ -69,10 +91,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ getParams: 'getParams' })
+    ...mapGetters({ getParams: 'getParams', getCase: 'getCase' })
   },
   methods: {
-    ...mapMutations(['restartLimit', 'setErrorFood']),
+    ...mapMutations(['restartLimit', 'setErrorFood', 'setCase']),
     ...mapActions(['sortingFoods']),
     updateScroll() {
       this.scrollPosition = window.scrollY
@@ -96,6 +118,9 @@ export default {
     },
     onHome() {
       this.$router.push('/')
+    },
+    clickTrigger(payload) {
+      this.setCase(payload)
     }
   },
   created() {

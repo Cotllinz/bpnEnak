@@ -11,8 +11,8 @@ export default {
     errorSearch: false,
     sumData: 0,
     totalData: 0,
-    limit: 99999,
-    limitData: 6
+    limitData: 6,
+    caseMobile: 0
   },
   mutations: {
     setFood(state, payload) {
@@ -58,6 +58,9 @@ export default {
       } else {
         state.errorSearch = payload
       }
+    },
+    setCase(state, payload) {
+      state.caseMobile = payload
     }
   },
   actions: {
@@ -65,7 +68,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `${process.env.VUE_APP_URL}menu?type=${context.state.searchParams.type}&price=${context.state.searchParams.price}&kecamatan=${context.state.searchParams.district}&search=${context.state.searchParams.searchName}&limit=${context.state.limit}`
+            `${process.env.VUE_APP_URL}menu?type=${context.state.searchParams.type}&price=${context.state.searchParams.price}&kecamatan=${context.state.searchParams.district}&search=${context.state.searchParams.searchName}`
           )
           .then(res => {
             context.dispatch('getForLimit')
@@ -98,6 +101,9 @@ export default {
     },
     getLimit(state) {
       return state.limitData
+    },
+    getCase(state) {
+      return state.caseMobile
     }
   }
 }

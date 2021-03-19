@@ -2,7 +2,8 @@ import axios from 'axios'
 export default {
   state: {
     reputations: [],
-    reputationsLoading: false
+    reputationsLoading: false,
+    limit: 99999
   },
   mutations: {
     setReputations(state, payload) {
@@ -13,7 +14,9 @@ export default {
     reputation(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`${process.env.VUE_APP_URL}reputation/${payload}`)
+          .get(
+            `${process.env.VUE_APP_URL}reputation/${payload}?limit=${context.state.limit}`
+          )
           .then(res => {
             context.commit('setReputations', res.data)
             context.state.reputationsLoading = true
@@ -31,6 +34,9 @@ export default {
     },
     getLoadingReputations(state) {
       return state.reputationsLoading
+    },
+    getLimitReputations(state) {
+      return state.limit
     }
   }
 }

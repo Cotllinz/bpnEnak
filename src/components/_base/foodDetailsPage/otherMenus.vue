@@ -5,7 +5,11 @@
         <h4>Other Product From Restaurant</h4>
       </section>
       <b-row cols-md="2" cols-lg="2" cols-xl="3">
-        <b-col v-for="(items, index) in menu" :key="index" class="pr-lg-0">
+        <b-col
+          v-for="(items, index) in menu.slice(0, 3)"
+          :key="index"
+          class="pr-lg-0"
+        >
           <b-card
             :img-src="`${imageUrl}menu/${items.menu_image[0].image_name}`"
             class="py-lg-2 py-3 px-3 card_images align-items-center mb-4"
