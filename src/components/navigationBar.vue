@@ -43,8 +43,12 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="navbar_items ml-auto align-items-center flex-row">
-          <b-nav-item class="mr-lg-3 mr-3">Login</b-nav-item>
-          <b-nav-item v-if="onScroll">Signup</b-nav-item>
+          <b-nav-item class="mr-lg-3 mr-3"
+            ><router-link to="/login">Login</router-link></b-nav-item
+          >
+          <b-nav-item v-if="onScroll"
+            ><router-link to="/signup">Signup</router-link></b-nav-item
+          >
           <b-nav-item v-else
             ><button class="btn_singUp d-none d-md-block py-2 px-3">
               Create Account
