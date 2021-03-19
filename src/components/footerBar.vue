@@ -22,10 +22,10 @@
           </section>
           <section class="meHover mb-4 mb-lg-5">
             <h4>
-              Interested with us? <br />
+              Interested in us? <br />
               Contact us above!
             </h4>
-            <h5 class="mt-3">© 2021 R3 Tech</h5>
+            <h5 @click="onAbout" class="mt-3">© 2021 R3 Tech</h5>
           </section>
         </b-col>
       </b-row>
@@ -34,7 +34,12 @@
 </template>
 <script>
 export default {
-  name: 'footerBar'
+  name: 'footerBar',
+  methods: {
+    onAbout() {
+      this.$router.push('/about')
+    }
+  }
 }
 </script>
 <style scoped>

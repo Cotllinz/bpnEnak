@@ -2,7 +2,7 @@
   <div class="headerHome">
     <b-container>
       <section class="title_header">
-        <h1>Find the best food in Balikpapan with us!</h1>
+        <h1>Explore the best food in Balikpapan!</h1>
       </section>
     </b-container>
   </div>

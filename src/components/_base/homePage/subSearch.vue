@@ -1,7 +1,7 @@
 <template>
   <section class="subSearch mt-lg-4">
     <b-container>
-      <h4 class="title_district">Sub-District</h4>
+      <h4 class="title_district">District</h4>
       <b-row cols-lg="3" cols="2" class="mt-lg-3">
         <b-col>
           <section class="subDistrict mb-3 mb-lg-4">
