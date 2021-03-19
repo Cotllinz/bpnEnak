@@ -9,7 +9,7 @@
           <a href="https://www.linkedin.com/in/raka-raprast/">
             <div class="text-center">
               <img
-                src="../../../assets/Images/team/raka.png"
+                src="../../../assets/Images/team/raka.jpeg"
                 class="rounded-circle"
               />
               <h4 class="mt-3">Raka R.A Prasetyo</h4>
