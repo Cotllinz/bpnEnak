@@ -8,6 +8,7 @@ import login from '../views/auth/login.vue'
 import signup from '../views/auth/signup.vue'
 import reset from '../views/auth/reset.vue'
 import forgot from '../views/auth/forgot.vue'
+import about from '../views/about.vue'
 
 Vue.use(VueRouter)
 
@@ -51,6 +52,11 @@ const routes = [
     path: '/forgot',
     name: 'forgot',
     component: forgot
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: about
   }
 ]
 
