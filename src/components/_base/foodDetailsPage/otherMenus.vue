@@ -68,6 +68,7 @@ export default {
           }
         })
         .catch(() => {})
+      window.scrollTo(0, 0)
       this.menuData(this.$route.params.idFood)
     }
   }
