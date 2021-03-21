@@ -25,6 +25,9 @@ export default {
     why,
     team,
     footerBar
+  },
+  created() {
+    window.scrollTo(0, 0)
   }
 }
 </script>

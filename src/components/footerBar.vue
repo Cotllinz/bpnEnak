@@ -15,6 +15,12 @@
               alt="icons_whatsapp"
             />
             <img
+              class="icons_media mr-2"
+              @click="onAbout"
+              src="../assets/Images/Logo/AboutUs.svg"
+              alt="icons_AboutUs"
+            />
+            <img
               class="icons_media"
               src="../assets/Images/Logo/icons_ig.svg"
               alt="icons_ig"
@@ -25,7 +31,7 @@
               Interested in us? <br />
               Contact us above!
             </h4>
-            <h5 @click="onAbout" class="mt-3">© 2021 R3 Tech</h5>
+            <h5 class="mt-3">© 2021 R3 Tech</h5>
           </section>
         </b-col>
       </b-row>
@@ -37,7 +43,7 @@ export default {
   name: 'footerBar',
   methods: {
     onAbout() {
-      this.$router.push('/about')
+      this.$router.push('/about').catch(() => {})
     }
   }
 }

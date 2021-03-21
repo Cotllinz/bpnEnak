@@ -3,11 +3,15 @@
     <b-container>
       <b-row>
         <b-col col lg="5" md="5" sm="6" cols="6">
-          <img src="../../../assets/Images/Logo/logoNavbar.svg" />
+          <img
+            style="cursor:pointer;"
+            @click="onHome"
+            src="../../../assets/Images/Logo/logoNavbar.svg"
+          />
         </b-col>
         <b-col col lg="7" md="7" sm="6" cols="6">
           <div class="center">
-            <router-link to="">
+            <router-link to="/">
               <p>Home</p>
             </router-link>
           </div>
@@ -17,6 +21,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    onHome() {
+      this.$router.push('/')
+    }
+  }
+}
+</script>
 <style scoped>
 img {
   max-width: 150px;
