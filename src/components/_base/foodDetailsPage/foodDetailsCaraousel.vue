@@ -48,7 +48,7 @@ export default {
   computed: {
     ...mapGetters({ getLoading: 'getLoadingMenu', menu: 'getMenu' })
   },
-  beforeCreate() {
+  created() {
     this.menuData(this.$route.params.idFood)
   },
   methods: {

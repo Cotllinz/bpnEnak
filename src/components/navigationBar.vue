@@ -44,7 +44,7 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="navbar_items ml-auto align-items-center flex-row">
-          <b-nav-item class="mr-lg-3 mr-3 d-none d-md-block" @click="onLogin"
+          <b-nav-item v-if="onScroll" class="mr-lg-3 mr-3" @click="onLogin"
             >Login</b-nav-item
           >
           <b-nav-item @click="onSignup" v-if="onScroll">Signup</b-nav-item>

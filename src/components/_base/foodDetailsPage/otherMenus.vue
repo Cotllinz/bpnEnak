@@ -11,6 +11,8 @@
           class="pr-lg-0"
         >
           <b-card
+            style="cursor:pointer;"
+            @click="gotoFood(items)"
             :img-src="`${imageUrl}menu/${items.menu_image[0].image_name}`"
             class="py-lg-2 py-3 px-3 card_images align-items-center mb-4"
             img-alt="cardProduct"
@@ -45,12 +47,28 @@ export default {
     this.menuList(this.$route.query.restoId)
   },
   methods: {
-    ...mapActions(['menuList']),
+    ...mapActions(['menuList', 'menuData']),
     formatPrice(value) {
       if (value) {
         const val = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.')
         return val
       }
+    },
+    gotoFood(items) {
+      const foodName = items.menu_name.replace(/\s/g, '')
+      this.$router
+        .push({
+          name: 'fooDetails',
+          params: {
+            idFood: items.menu_id
+          },
+          query: {
+            restoId: items.resto_id,
+            foodName: foodName
+          }
+        })
+        .catch(() => {})
+      this.menuData(this.$route.params.idFood)
     }
   }
 }

@@ -19,7 +19,7 @@
               <section class="d-flex reviews_names align-items-center">
                 <img
                   class="images_reviews"
-                  src="../../../assets/Images/SecondaryThema/image_developers.jpeg"
+                  src="../../../assets/Images/SecondaryThema/human_example.svg"
                   alt="images_reviews"
                 />
                 <section class="pl-2">

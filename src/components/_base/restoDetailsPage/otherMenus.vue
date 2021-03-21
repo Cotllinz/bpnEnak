@@ -12,6 +12,8 @@
           class="pr-lg-0"
         >
           <b-card
+            @click="gotoFood(items)"
+            style="cursor: pointer;"
             :img-src="`${imageUrl}menu/${items.menu_image[0].image_name}`"
             class="py-lg-2 py-3 px-3 card_images align-items-center mb-4"
             img-alt="cardProduct"
@@ -77,6 +79,19 @@ export default {
     },
     showMore() {
       this.setLimitListMenu()
+    },
+    gotoFood(items) {
+      const foodName = items.menu_name.replace(/\s/g, '')
+      this.$router.push({
+        name: 'fooDetails',
+        params: {
+          idFood: items.menu_id
+        },
+        query: {
+          restoId: items.resto_id,
+          foodName: foodName
+        }
+      })
     }
   }
 }
