@@ -1,6 +1,14 @@
 <template>
   <section v-if="loadingResto">
     <b-container>
+      <section>
+        <img
+          @click="onBack"
+          class="backArrow  d-block d-md-none"
+          src="../../../assets/Images/Logo/previous.svg"
+          alt="backArrow"
+        />
+      </section>
       <b-row>
         <b-col cols="12">
           <section
@@ -26,7 +34,7 @@
           </section>
         </b-col>
         <b-col cols="12">
-          <section>
+          <section v-if="show">
             <agile
               class="images__view"
               ref="main"
@@ -111,7 +119,7 @@ export default {
         dots: false,
         navButtons: false,
         slidesToShow: 3,
-        infinite: true,
+        infinite: false,
         responsive: [
           {
             breakpoint: 100,
@@ -137,22 +145,29 @@ export default {
   created() {
     this.restoData(this.$route.params.idResto).then(() => {
       this.lenghtImage = this.resto.resto_image.length
-      /*  this.show = true */
-      this.viewImage.push(this.$refs.thumbnails)
-      this.thumbnailImaes.push(this.$refs.main)
-      /*   if (this.show) {
-        if (this.lenghtImage > 2) {
-          this.options2.infinite = true
-          this.options2.slidesToShow = 3
-        } else if (this.lenghtImage > 1) {
-          this.options2.infinite = true
-          this.options2.responsive[1].settings.slidesToShow = 2
+      this.show = true
+      if (this.lenghtImage > 2) {
+        this.options2.infinite = true
+        this.options2.slidesToShow = 3
+      } else if (this.lenghtImage > 1) {
+        this.options2.infinite = true
+        this.options2.responsive[1].settings.slidesToShow = 2
+      } else if (this.lenghtImage === 1) {
+        this.options1.navButtons = false
+      }
+      this.$nextTick(() => {
+        if (this.show) {
+          this.viewImage.push(this.$refs.thumbnails)
+          this.thumbnailImaes.push(this.$refs.main)
         }
-      } */
+      })
     })
   },
 
   methods: {
+    onBack() {
+      this.$router.push('/Bppsearch')
+    },
     ...mapActions(['restoData'])
   }
 }
@@ -165,6 +180,12 @@ export default {
 }
 .agile__slides {
   border-radius: 15px;
+}
+.backArrow {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  margin-top: -20px;
 }
 .images_main {
   height: 320px;

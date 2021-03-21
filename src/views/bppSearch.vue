@@ -1,6 +1,6 @@
 <template>
   <div class="bppSearch">
-    <navBar :onScroll="false" />
+    <navBar :onScroll="false" :MobileSearch="true" />
     <LoginMobile v-if="getCase === 1" />
     <SearchMobile v-if="getCase === 2" />
     <main v-if="getCase === 0" class="main_details">
@@ -33,7 +33,7 @@ import searchFilter from '@/components/_base/searchPage/subFilterSearch.vue'
 import cardProduct from '@/components/_base/searchPage/cardProducts.vue'
 import LoginMobile from '@/components/_base/MobileSearch/LoginMobile.vue'
 import SearchMobile from '@/components/_base/MobileSearch/SearchMobile.vue'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'bppSearch',
   components: {
@@ -44,11 +44,17 @@ export default {
     LoginMobile,
     SearchMobile
   },
+
   computed: {
     ...mapGetters(['getParams', 'getCase'])
   },
+
   created() {
     window.scrollTo(0, 0)
+    this.restartLimit()
+  },
+  methods: {
+    ...mapMutations(['restartLimit'])
   }
 }
 </script>

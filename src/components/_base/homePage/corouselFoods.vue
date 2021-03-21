@@ -51,6 +51,7 @@ export default {
   data() {
     return {
       imageUrl: process.env.VUE_APP_URL_IMAGE,
+
       settings: {
         infinite: true,
         slidesToShow: 6,

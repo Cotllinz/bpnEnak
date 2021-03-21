@@ -71,13 +71,12 @@ export default {
             `${process.env.VUE_APP_URL}menu?type=${context.state.searchParams.type}&price=${context.state.searchParams.price}&kecamatan=${context.state.searchParams.district}&search=${context.state.searchParams.searchName}`
           )
           .then(res => {
-            context.dispatch('getForLimit')
             context.commit('setFood', res.data)
             resolve(res)
-            console.clear()
+            /*  console.clear() */
           })
           .catch(err => {
-            console.clear()
+            /*     console.clear() */
             reject(err.response)
           })
       })

@@ -7,8 +7,8 @@
       fixed="top"
     >
       <b-container>
-        <b-navbar-brand
-          ><img
+        <b-navbar-brand>
+          <img
             @click="onHome"
             class="logo__images"
             src="../assets/Images/Logo/logoNavbar.svg"
@@ -56,7 +56,7 @@
               Create Account
             </button>
             <div class="d-block d-md-none d-flex mobile_signup">
-              <section>
+              <section v-if="MobileSearch">
                 <b-icon
                   @click="clickTrigger(2)"
                   class="mr-3"
@@ -87,7 +87,7 @@
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
-  props: ['onScroll'],
+  props: ['onScroll', 'MobileSearch'],
   name: 'navigationBar',
   data() {
     return {

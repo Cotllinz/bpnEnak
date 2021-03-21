@@ -28,8 +28,12 @@
             </h2>
           </section>
           <section class="text-center mt-4">
-            <button class="px-5 btn_masuk mr-3 py-2">Masuk</button>
-            <button class="px-5 btn_daftar py-2">Daftar</button>
+            <button @click="onLogin" class="px-5 btn_masuk mr-3 py-2">
+              Masuk
+            </button>
+            <button @click="onSignup" class="px-5 btn_daftar py-2">
+              Daftar
+            </button>
           </section>
         </b-col>
       </b-row>
@@ -44,6 +48,12 @@ export default {
     ...mapMutations(['setCase']),
     Close(payload) {
       this.setCase(payload)
+    },
+    onLogin() {
+      this.$router.push('/login')
+    },
+    onSignup() {
+      this.$router.push('/signup')
     }
   }
 }

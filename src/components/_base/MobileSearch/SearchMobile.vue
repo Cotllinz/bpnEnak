@@ -27,10 +27,9 @@
               </template>
               <b-form-input
                 autocomplete="off"
+                v-model.lazy="search"
                 type="text"
-                @keyup.enter="searchFood($event)"
-                @keyup="searchFood($event)"
-                placeholder="Search Food"
+                placeholder="Nasi Goreng"
                 maxlength="30"
               ></b-form-input>
             </b-input-group>
@@ -43,15 +42,15 @@
             <section>
               <label class="labelCheckboxList" for="types">Type</label>
               <b-form-checkbox
-                @change="searchFilter"
                 value="drinks"
+                v-model="getParams.type"
                 unchecked-value=""
               >
                 <label class="labelCheckbox" for="labels">Drink</label>
               </b-form-checkbox>
               <b-form-checkbox
-                @change="searchFilter"
                 value="foods"
+                v-model="getParams.type"
                 unchecked-value=""
               >
                 <label class="labelCheckbox" for="labels">Food</label>
@@ -60,22 +59,22 @@
             <section>
               <label class="labelCheckboxList" for="Price">Price</label>
               <b-form-checkbox
-                @change="searchFilter"
                 value="low"
+                v-model="getParams.price"
                 unchecked-value=""
               >
                 <label class="labelCheckbox" for="labels">Low</label>
               </b-form-checkbox>
               <b-form-checkbox
-                @change="searchFilter"
                 value="mid"
+                v-model="getParams.price"
                 unchecked-value=""
               >
                 <label class="labelCheckbox" for="labels">Medium</label>
               </b-form-checkbox>
               <b-form-checkbox
-                @change="searchFilter"
                 value="high"
+                v-model="getParams.price"
                 unchecked-value=""
               >
                 <label class="labelCheckbox" for="labels">High</label>
@@ -85,7 +84,7 @@
               <label class="labelCheckboxList" for="District">District</label>
               <b-form-checkbox
                 value="balikpapan kota"
-                @change="searchFilter"
+                v-model="getParams.district"
                 unchecked-value=""
                 aria-label="labels"
               >
@@ -94,7 +93,7 @@
                 >
               </b-form-checkbox>
               <b-form-checkbox
-                @change="searchFilter"
+                v-model="getParams.district"
                 value="balikpapan utara"
                 unchecked-value=""
               >
@@ -103,7 +102,7 @@
                 >
               </b-form-checkbox>
               <b-form-checkbox
-                @change="searchFilter"
+                v-model="getParams.district"
                 value="balikpapan barat"
                 unchecked-value=""
               >
@@ -112,7 +111,7 @@
                 >
               </b-form-checkbox>
               <b-form-checkbox
-                @change="searchFilter"
+                v-model="getParams.district"
                 value="balikpapan tengah"
                 unchecked-value=""
               >
@@ -121,7 +120,7 @@
                 >
               </b-form-checkbox>
               <b-form-checkbox
-                @change="searchFilter"
+                v-model="getParams.district"
                 value="balikpapan timur"
                 unchecked-value=""
               >
@@ -130,7 +129,7 @@
                 >
               </b-form-checkbox>
               <b-form-checkbox
-                @change="searchFilter"
+                v-model="getParams.district"
                 value="balikpapan selatan"
                 unchecked-value=""
               >
@@ -142,20 +141,37 @@
           </b-card>
         </b-col>
         <b-col cols="12" class="text-center">
-          <button class="py-2 px-5 btn_search mb-3  mt-3 ">Search</button>
+          <button @click="Close(0)" class="py-2 px-5 btn_search mb-3  mt-3 ">
+            Search
+          </button>
         </b-col>
       </b-row>
     </b-container>
   </main>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'SearchMobile',
+  data() {
+    return {}
+  },
+  computed: {
+    ...mapGetters({ getParams: 'getParams' }),
+    search: {
+      get() {
+        return this.getParams.searchName
+      },
+      set(e) {
+        return (this.getParams.searchName = e)
+      }
+    }
+  },
   methods: {
-    ...mapMutations(['setCase']),
+    ...mapMutations(['setCase', 'restartLimit']),
     Close(payload) {
       this.setCase(payload)
+      this.restartLimit()
     }
   }
 }

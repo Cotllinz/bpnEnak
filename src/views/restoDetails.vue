@@ -1,6 +1,7 @@
 <template>
   <div class="restoDetail">
     <navBar :onScroll="false" />
+    <LoginMobile v-if="getCase === 1" />
     <main class="mainDetails">
       <imageSlider />
       <reviewsMaps />
@@ -15,8 +16,10 @@ import navBar from '@/components/navigationBar.vue'
 import footerBar from '@/components/footerBar.vue'
 import imageSlider from '@/components/_base/restoDetailsPage/imageSlider.vue'
 import reviewsMaps from '@/components/_base/restoDetailsPage/reviewsMaps.vue'
+import LoginMobile from '@/components/_base/MobileSearch/LoginMobile.vue'
 import reviews from '@/components/_base/restoDetailsPage/reviews.vue'
 import otherMenus from '@/components/_base/restoDetailsPage/otherMenus.vue'
+import { mapGetters } from 'vuex'
 export default {
   name: 'restoDetails',
   components: {
@@ -25,12 +28,14 @@ export default {
     imageSlider,
     reviewsMaps,
     reviews,
+    LoginMobile,
     otherMenus
   },
   data() {
-    return {
-      /*  reload: location.reload() */
-    }
+    return {}
+  },
+  computed: {
+    ...mapGetters(['getCase'])
   },
   created() {
     window.scrollTo(0, 0)

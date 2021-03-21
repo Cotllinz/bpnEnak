@@ -1,7 +1,15 @@
 <template>
   <section>
     <b-container v-if="getLoading">
-      <agile class="food__slider" :options="options1">
+      <section>
+        <img
+          @click="onBack"
+          class="backArrow  d-block d-md-none mb-3"
+          src="../../../assets/Images/Logo/previous.svg"
+          alt="backArrow"
+        />
+      </section>
+      <agile v-if="show" class="food__slider" :options="options1">
         <div
           class="slide__foodDetails d-flex align-items-center"
           v-for="(items, index) in menu.image"
@@ -37,6 +45,7 @@ export default {
   components: { agile: VueAgile },
   data() {
     return {
+      show: false,
       imageUrl: process.env.VUE_APP_URL_IMAGE,
       options1: {
         fade: true,
@@ -49,9 +58,16 @@ export default {
     ...mapGetters({ getLoading: 'getLoadingMenu', menu: 'getMenu' })
   },
   created() {
-    this.menuData(this.$route.params.idFood)
+    this.menuData(this.$route.params.idFood).then(() => {
+      this.$nextTick(() => {
+        this.show = true
+      })
+    })
   },
   methods: {
+    onBack() {
+      this.$router.push('/Bppsearch')
+    },
     ...mapActions(['menuData'])
   }
 }
@@ -61,6 +77,12 @@ export default {
   height: 350px;
   border-radius: 7px;
   width: 100%;
+}
+.backArrow {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  margin-top: -20px;
 }
 .images_content {
   object-fit: cover;

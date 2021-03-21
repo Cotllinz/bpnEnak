@@ -160,7 +160,7 @@ export default {
       })
   },
   methods: {
-    ...mapActions(['sortingFoods', 'getForLimit']),
+    ...mapActions(['sortingFoods']),
     ...mapMutations(['setErrorFood', 'setLimit']),
     goToDetails(items) {
       const restoName = items.resto.resto_name.replace(/\s/g, '')
@@ -227,6 +227,7 @@ export default {
   font-family: 'Poppins', sans-serif;
   font-size: 35px;
   font-weight: 500;
+
   position: absolute;
   top: 50%;
   left: 0;
@@ -303,7 +304,12 @@ hr {
     position: relative;
   }
 }
-
+@media (max-width: 767px) {
+  .images_card {
+    height: auto;
+    min-height: 100vh;
+  }
+}
 @media (max-width: 347px) {
   .b-rating {
     font-size: 13px;
