@@ -1,7 +1,10 @@
 <template>
   <section class="main mt-lg-4 mt-3 ">
     <b-container>
-      <section class="title__newTaste d-flex align-items-end">
+      <section
+        data-aos="fade-up"
+        class="title__newTaste d-flex align-items-end"
+      >
         <div>
           <h3>New Taste</h3>
           <p class="mt-1 mt-lg-0">
@@ -11,7 +14,7 @@
       </section>
     </b-container>
     <b-container fluid>
-      <section class="slick">
+      <section data-aos="fade-up" class="slick">
         <VueSlickCarousel v-if="turnOnSlider" class="px-lg-4" v-bind="settings">
           <section
             v-for="(items, index) in newMenu"

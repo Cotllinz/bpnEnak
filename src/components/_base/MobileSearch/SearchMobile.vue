@@ -1,5 +1,5 @@
 <template>
-  <main class="searchMobiles">
+  <main data-aos="fade-right" class="searchMobiles">
     <b-container>
       <b-row>
         <b-col cols="12">

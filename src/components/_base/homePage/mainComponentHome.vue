@@ -25,7 +25,7 @@
       </div>
       <b-row cols-lg="2" cols-md="2" cols="1">
         <b-col lg="12" cols="12" md="12" class="mt-lg-5 mt-4">
-          <section class="title__BestFood">
+          <section class="animate__animated animate__fadeIn">
             <h2>Best Choice</h2>
             <p class="mt-1 mt-lg-0">
               These are our collection that can you find from each sub-district
@@ -37,6 +37,9 @@
           <section class="cardBest__food">
             <b-card-group deck>
               <b-card
+                data-aos="zoom-in"
+                data-aos-easing="linear"
+                data-aos-duration="300"
                 style="cursor: pointer;"
                 @click="goToResto(items)"
                 class="images_food mb-3 mb-lg-4"

@@ -6,6 +6,7 @@
         <b-col>
           <section class="subDistrict mb-3 mb-lg-4">
             <button
+              data-aos="fade-right"
               @mouseover="animationOn1 = true"
               @mouseleave="animationOn1 = false"
               @click="onClickSearch('balikpapan kota')"
@@ -23,6 +24,7 @@
         <b-col>
           <section class="subDistrict mb-3 mb-lg-4">
             <button
+              data-aos="fade-right"
               @mouseover="animationOn2 = true"
               @mouseleave="animationOn2 = false"
               @click="onClickSearch('balikpapan tengah')"
@@ -40,6 +42,7 @@
         <b-col>
           <section class="subDistrict mb-3 mb-lg-4">
             <button
+              data-aos="fade-right"
               @mouseover="animationOn3 = true"
               @mouseleave="animationOn3 = false"
               @click="onClickSearch('balikpapan timur')"
@@ -57,6 +60,7 @@
         <b-col>
           <section class="subDistrict mb-3 mb-lg-0">
             <button
+              data-aos="fade-right"
               @mouseover="animationOn4 = true"
               @mouseleave="animationOn4 = false"
               @click="onClickSearch('balikpapan selatan')"
@@ -74,6 +78,7 @@
         <b-col>
           <section class="subDistrict mb-3 mb-lg-0">
             <button
+              data-aos="fade-right"
               @mouseover="animationOn5 = true"
               @mouseleave="animationOn5 = false"
               @click="onClickSearch('balikpapan utara')"
@@ -91,6 +96,7 @@
         <b-col>
           <section class="subDistrict mb-3 mb-lg-0">
             <button
+              data-aos="fade-right"
               @mouseover="animationOn6 = true"
               @mouseleave="animationOn6 = false"
               @click="onClickSearch('balikpapan barat')"
@@ -109,7 +115,11 @@
     </b-container>
     <section class="showMore mt-lg-5 mt-3">
       <b-container>
-        <button class="btn_showMore py-2 px-5">
+        <button
+          @click="goToFoodFilter"
+          data-aos="fade-in"
+          class="btn_showMore py-2 px-5"
+        >
           Show More
           <b-icon class="arrow_Btnmore" icon="arrow-right-short"></b-icon>
         </button>
@@ -132,11 +142,16 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['resetOnDistrict', 'restartLimit']),
+    ...mapMutations(['resetOnDistrict', 'restartLimit', 'resetOnAll']),
     onClickSearch(e) {
       this.restartLimit()
       this.resetOnDistrict(e)
       this.$router.push('/Bppsearch')
+    },
+    goToFoodFilter() {
+      this.$router.push('/Bppsearch')
+      this.resetOnAll()
+      this.restartLimit()
     }
   }
 }

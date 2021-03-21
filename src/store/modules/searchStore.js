@@ -42,6 +42,14 @@ export default {
       }
       state.searchParams.district = payload
     },
+    resetOnAll(state) {
+      state.searchParams = {
+        searchName: '',
+        price: '',
+        type: '',
+        district: ''
+      }
+    },
     setLimit(state) {
       if (state.totalData > state.limitData) {
         state.limitData += 6

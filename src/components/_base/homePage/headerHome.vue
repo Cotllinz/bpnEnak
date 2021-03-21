@@ -2,7 +2,9 @@
   <div class="headerHome">
     <b-container>
       <section class="title_header">
-        <h1>Explore the best food in Balikpapan!</h1>
+        <h1 class="animate__animated animate__fadeInUp">
+          Explore the best food in Balikpapan!
+        </h1>
       </section>
     </b-container>
   </div>

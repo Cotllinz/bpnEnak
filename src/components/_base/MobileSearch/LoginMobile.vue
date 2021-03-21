@@ -1,5 +1,5 @@
 <template>
-  <main class="MbLogin">
+  <main data-aos="fade-right" class="MbLogin ">
     <b-container>
       <b-row>
         <b-col cols="12">

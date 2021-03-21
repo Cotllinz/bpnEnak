@@ -10,6 +10,7 @@
   "dependencies": {
     "@mapbox/mapbox-gl-geocoder": "^4.7.0",
     "animate.css": "^4.1.1",
+    "aos": "^2.3.4",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",

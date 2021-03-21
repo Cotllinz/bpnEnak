@@ -8,6 +8,7 @@
         :key="'Dekstop' + index"
       >
         <b-card
+          data-aos="fade-up"
           :img-src="`${imageUrl}menu/${items.image.image_name}`"
           @click="gotoFoodwithImage($event, items)"
           class="py-4 px-3 card_images align-items-center mb-4"
@@ -61,6 +62,7 @@
         class="d-block d-lg-none"
       >
         <b-card
+          data-aos="fade-up"
           :img-src="`${imageUrl}menu/${items.image.image_name}`"
           @click="gotoFoodwithImage($event, items)"
           class="py-4 px-3 d-block card_images align-items-center mb-4"
