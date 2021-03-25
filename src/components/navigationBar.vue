@@ -44,13 +44,25 @@
         </b-navbar-nav>
 
         <b-navbar-nav class="navbar_items ml-auto align-items-center flex-row">
-          <b-nav-item v-if="onScroll" class="mr-lg-3 mr-3" @click="onLogin"
+          <a
+            v-if="getUser.user_id"
+            class="mr-lg-3 mr-3 logout d-none d-md-block"
+            >Hello Visitor,
+            <span class="onLogout" @click="onLogout"> Logout</span></a
+          >
+          <b-nav-item
+            v-if="onScroll && !getUser.user_id"
+            class="mr-lg-3 mr-3"
+            @click="onLogin"
             >Login</b-nav-item
           >
-          <b-nav-item @click="onSignup" v-if="onScroll">Signup</b-nav-item>
+          <b-nav-item @click="onSignup" v-if="onScroll && !getUser.user_id"
+            >Signup</b-nav-item
+          >
           <b-nav-item v-else
             ><button
               @click="onSignup"
+              v-if="!getUser.user_id"
               class="btn_singUp d-none d-md-block py-2 px-3"
             >
               Create Account
@@ -96,13 +108,20 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ getParams: 'getParams', getCase: 'getCase' })
+    ...mapGetters({
+      getParams: 'getParams',
+      getCase: 'getCase',
+      getUser: 'getUser'
+    })
   },
   methods: {
     ...mapMutations(['restartLimit', 'setErrorFood', 'setCase']),
-    ...mapActions(['sortingFoods']),
+    ...mapActions(['sortingFoods', 'logout']),
     updateScroll() {
       this.scrollPosition = window.scrollY
+    },
+    onLogout() {
+      this.logout()
     },
     onLogin() {
       this.$router.push('/login')
@@ -152,6 +171,18 @@ export default {
   cursor: pointer;
   width: 125px;
   object-fit: contain;
+}
+.onLogout {
+  color: #d01010;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+}
+.logout {
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: none;
 }
 .change_color {
   transition: 0.5s;

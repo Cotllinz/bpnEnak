@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 export default {
   name: 'apps',
   data() {
@@ -17,12 +17,25 @@ export default {
       window.addEventListener('resize', this.onResize)
     })
   },
-
+  updated() {
+    if (
+      this.$router.history.current.path !== '/login' &&
+      this.$router.history.current.path !== '/signup' &&
+      this.$router.history.current.path !== '/forgot'
+    ) {
+      this.setHistory(this.$router.history.current.path)
+    }
+  },
+  created() {
+    this.interceptorRequest()
+    this.interceptorResponse()
+  },
   beforeDestroy() {
     window.removeEventListener('resize', this.onResize)
   },
   methods: {
-    ...mapMutations(['setCase']),
+    ...mapActions(['interceptorRequest', 'interceptorResponse']),
+    ...mapMutations(['setCase', 'setHistory']),
     onResize() {
       this.windowWidth = window.innerWidth
       if (this.windowWidth > 767) {
@@ -41,5 +54,11 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+.swal2-title,
+.swal2-html-container,
+.swal2-confirm,
+.swal2-deny {
+  font-family: 'Poppins', sans-serif;
 }
 </style>

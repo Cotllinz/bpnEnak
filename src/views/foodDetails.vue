@@ -2,12 +2,12 @@
   <div class="foodDetails">
     <navigationBar :onScroll="false" />
     <LoginMobile v-if="getCase === 1" />
-    <main class="foodMain">
+    <main v-if="getCase === 0" class="foodMain">
       <imageCaraousel />
       <menusInformation />
       <otherMenus />
     </main>
-    <footerBar />
+    <footerBar v-if="getCase === 0" />
   </div>
 </template>
 <script>

@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <div class="homebg__display">
+    <LoginMobile v-if="getCase === 1" />
+    <div v-if="getCase === 0" class="homebg__display">
       <navBar :onScroll="true" />
       <headerHome />
       <mainHome />
@@ -14,11 +15,13 @@
 <script>
 // @ is an alias to /src
 import navBar from '@/components/navigationBar.vue'
+import LoginMobile from '@/components/_base/MobileSearch/LoginMobile.vue'
 import headerHome from '@/components/_base/homePage/headerHome.vue'
 import mainHome from '@/components/_base/homePage/mainComponentHome.vue'
 import corouselFood from '@/components/_base/homePage/corouselFoods.vue'
 import subSearch from '@/components/_base/homePage/subSearch.vue'
 import footerBar from '@/components/footerBar.vue'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -27,10 +30,14 @@ export default {
     mainHome,
     corouselFood,
     subSearch,
-    footerBar
+    footerBar,
+    LoginMobile
   },
   data() {
     return {}
+  },
+  computed: {
+    ...mapGetters(['getCase'])
   },
   created() {
     window.scrollTo(0, 0)

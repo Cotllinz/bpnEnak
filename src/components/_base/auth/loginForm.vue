@@ -62,9 +62,10 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import Alert from '../../../mixins/Alert'
 export default {
+  mixins: [Alert],
   data() {
     return {
       form: {
@@ -74,23 +75,36 @@ export default {
       error: ''
     }
   },
+  computed: {
+    ...mapGetters(['getPathHistory'])
+  },
   methods: {
     ...mapActions(['login']),
+    ...mapMutations(['setCase']),
     loginUser() {
       if (!this.form.user_email || !this.form.user_password) {
         return (this.error =
           'Please fill your email & password correctly first')
       }
       this.login(this.form)
-        .then(result => {
-          console.log(result)
+        .then(() => {
+          this.AlertSuccesLogin().then(res => {
+            if (res) {
+              if (this.getPathHistory) {
+                this.$router.push(this.getPathHistory)
+                this.setCase(0)
+              } else {
+                this.$router.push('/')
+                this.setCase(0)
+              }
+            }
+          })
           this.error = ''
-          alert(result.data.msg)
         })
         .catch(err => {
-          console.log(err)
+          this.setCase(0)
+          this.AlertErrorLogin(err.data.msg)
           this.error = ''
-          alert(err.data.msg)
         })
     }
   }

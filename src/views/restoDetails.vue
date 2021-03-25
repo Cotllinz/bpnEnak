@@ -2,13 +2,13 @@
   <div class="restoDetail">
     <navBar :onScroll="false" />
     <LoginMobile v-if="getCase === 1" />
-    <main class="mainDetails">
+    <main v-if="getCase === 0" class="mainDetails">
       <imageSlider />
       <reviewsMaps />
       <reviews />
       <otherMenus />
     </main>
-    <footerBar />
+    <footerBar v-if="getCase === 0" />
   </div>
 </template>
 <script>

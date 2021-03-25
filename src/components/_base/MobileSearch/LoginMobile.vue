@@ -21,7 +21,7 @@
             />
           </div>
         </b-col>
-        <b-col cols="12">
+        <b-col v-if="!getUser.user_id" cols="12">
           <section>
             <h2 class="text-center titles mt-3">
               Masuk atau daftar ke BalikpapanEnak
@@ -36,15 +36,31 @@
             </button>
           </section>
         </b-col>
+        <b-col v-else cols="12">
+          <section>
+            <h2 class="text-center titles mt-3">
+              Hello Visitor,
+            </h2>
+          </section>
+          <section class="text-center ">
+            <button @click="onLogout" class="px-5 w-100 btn_masuk mr-3 py-2">
+              Logout
+            </button>
+          </section>
+        </b-col>
       </b-row>
     </b-container>
   </main>
 </template>
 <script>
-import { mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'MobileLogin',
+  computed: {
+    ...mapGetters(['getUser'])
+  },
   methods: {
+    ...mapActions(['logout']),
     ...mapMutations(['setCase']),
     Close(payload) {
       this.setCase(payload)
@@ -54,6 +70,10 @@ export default {
     },
     onSignup() {
       this.$router.push('/signup')
+    },
+    onLogout() {
+      this.logout()
+      this.setCase(0)
     }
   }
 }
