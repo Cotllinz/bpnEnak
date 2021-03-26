@@ -7,7 +7,7 @@
           lg="8"
           class="revies_section pr-md-0 order-2 order-md-1 mt-3 mt-lg-0"
         >
-          <section class="desc_restaurant d-none d-md-block mt-3 pt-1">
+          <section class="desc_restaurant d-none d-md-block mt-3 mt-md-2 pt-1">
             <h5>
               <span>Open</span> ({{ UpperResto(resto.resto_open_day) }} -
               {{ UpperResto(resto.resto_close_day) }}),
