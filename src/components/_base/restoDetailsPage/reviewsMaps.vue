@@ -5,7 +5,7 @@
         <b-col
           md="7"
           lg="8"
-          class="revies_section pr-md-0 order-2 order-lg-1 mt-3 mt-lg-0"
+          class="revies_section pr-md-0 order-2 order-md-1 mt-3 mt-lg-0"
         >
           <section class="desc_restaurant d-none d-lg-block mt-3 pt-1">
             <h5>
@@ -38,7 +38,7 @@
             </b-card>
           </section>
         </b-col>
-        <b-col md="5" lg="4" class="maps_section pl-md-1 order-1 order-lg-2">
+        <b-col md="5" lg="4" class="maps_section pl-md-1 order-1 order-md-2">
           <section class="desc_restaurant d-block d-lg-none mt-2">
             <h5><span>Open</span> (Mon - Sat, 09:00 - 21:00)</h5>
             <p>Gn. Bahagia</p>
