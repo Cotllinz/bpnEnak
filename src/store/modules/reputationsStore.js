@@ -26,6 +26,20 @@ export default {
             reject(err.response)
           })
       })
+    },
+    postReputations(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${process.env.VUE_APP_URL}reputation`, payload)
+          .then(res => {
+            resolve(res)
+            console.clear()
+          })
+          .catch(err => {
+            console.clear()
+            reject(err.response)
+          })
+      })
     }
   },
   getters: {

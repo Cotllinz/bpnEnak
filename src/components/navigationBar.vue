@@ -46,7 +46,7 @@
         <b-navbar-nav class="navbar_items ml-auto align-items-center flex-row">
           <a
             v-if="getUser.user_id"
-            class="mr-lg-3 mr-3 logout d-none d-md-block"
+            class="mr-lg-3 mr-3 logout d-none d-md-block infoLog"
             >Hello Visitor,
             <span class="onLogout" @click="onLogout"> Logout</span></a
           >
@@ -166,6 +166,9 @@ export default {
 }
 .navbar_items .nav-item .nav-link:hover {
   color: #eeeeee;
+}
+.infoLog {
+  font-family: 'Poppins', sans-serif;
 }
 .logo__images {
   cursor: pointer;

@@ -24,17 +24,21 @@
                 class="rating_review mb-3"
                 id="rating-inline"
                 inline
+                value="0"
+                v-model="form.reviews"
                 style="color: #fcc400;"
-                value="4"
               ></b-form-rating>
               <div class="reviews_area position-relative">
                 <section class="wrapper_textarea">
                   <b-form-textarea
                     placeholder="Write a Review here..."
                     rows="5"
+                    v-model="form.comment"
                     maxlength="170"
                   ></b-form-textarea>
-                  <button class="btn_sendReview py-2 px-5">Give Review</button>
+                  <button @click="onReviews" class="btn_sendReview py-2 px-5">
+                    Give Review
+                  </button>
                 </section>
               </div>
             </b-card>
@@ -76,23 +80,33 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import maps from './maps'
+import Alert from '../../../mixins/Alert'
 export default {
   name: 'reviewsMaps',
+  mixins: [Alert],
   data() {
-    return {}
+    return {
+      form: {
+        reviews: 0,
+        comment: ''
+      }
+    }
   },
   components: {
     maps
   },
   computed: {
-    ...mapGetters({ resto: 'getResto', restoLoading: 'getLoadingResto' })
+    ...mapGetters({
+      resto: 'getResto',
+      restoLoading: 'getLoadingResto',
+      getUser: 'getUser'
+    })
   },
   created() {
     this.restoData(this.$route.params.idResto)
   },
   methods: {
-    ...mapActions(['restoData']),
-
+    ...mapActions(['restoData', 'postReputations', 'reputation']),
     UpperResto(value) {
       if (value) {
         return value.charAt(0).toUpperCase() + value.slice(1, 3)
@@ -101,6 +115,82 @@ export default {
     formatDate(value) {
       if (value) {
         return value.slice(0, 5)
+      }
+    },
+    onReviews() {
+      if (this.getUser.user_id) {
+        if (this.form.reviews && this.form.comment) {
+          const formSend = {
+            resto_id: this.resto.resto_id,
+            user_id: this.getUser.user_id,
+            reputation_comment: this.form.comment,
+            reputation_rating: this.form.reviews
+          }
+          this.$swal({
+            title: 'Continue ?',
+            text: 'You are about to give a review to this restaurant',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, post it',
+            cancelButtonText: 'No, i change my mind',
+            reverseButtons: true,
+            confirmButtonColor: '#d01010'
+          }).then(res => {
+            if (res.isConfirmed) {
+              this.$swal({
+                title: 'Wait for submited your review',
+                icon: 'info',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+              }).then(() => {
+                this.postReputations(formSend)
+                  .then(res => {
+                    if (res) {
+                      this.$swal({
+                        title: 'Your Review has been submit',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true
+                      }).then(() => {
+                        this.reputation(this.$route.params.idResto)
+                        this.restoData(this.$route.params.idResto)
+                        this.form = {
+                          reviews: 0,
+                          comment: ''
+                        }
+                      })
+                    }
+                  })
+                  .catch(err => {
+                    if (err) {
+                      this.$swal({
+                        title: `Something went wrong!`,
+                        text: 'You only can review once / restaurant',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 2500,
+                        timerProgressBar: true
+                      })
+                    }
+                  })
+              })
+            } else if (res.isDismissed) {
+              this.$swal({
+                title: `It's Okay :)`,
+                icon: 'info',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true
+              })
+            }
+          })
+        } else {
+          this.AlertTeksEmpty()
+        }
+      } else {
+        this.$router.push('/login')
       }
     }
   }

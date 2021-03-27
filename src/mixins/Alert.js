@@ -35,6 +35,24 @@ export default {
             reject(err)
           })
       })
+    },
+    AlertTeksEmpty() {
+      return new Promise((resolve, reject) => {
+        this.$swal({
+          title: 'Something went wrong!',
+          icon: 'error',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true,
+          text: 'You must fill all form before post your review'
+        })
+          .then(result => {
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+      })
     }
   }
 }

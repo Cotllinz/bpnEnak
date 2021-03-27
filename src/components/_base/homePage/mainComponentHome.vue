@@ -28,7 +28,7 @@
           <section class="animate__animated animate__fadeIn">
             <h2>Best Choice</h2>
             <p class="mt-1 mt-lg-0">
-              These are our collection that can you find from each sub-district
+              These are our collection that can you find from each district
               around Balikpapan.
             </p>
           </section>
